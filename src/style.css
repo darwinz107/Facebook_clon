@@ -1,11 +1,29 @@
 .form{
 
-padding: 100px;
+padding: 10px;
 text-align: center;    
 }
 
 div{
     position: relative;
-    margin: 20px;
+    margin: 10px;
 
+}
+img{
+
+    width: 250px;
+    height: 300px;
+   margin-left: 530px ;
+  
+   
+}
+li:hover{
+color: aquamarine;
+}
+.btnBack{
+    border-style: dashed;
+    text-align: left;
+}
+.btnBack:hover{
+cursor: pointer;
 }
