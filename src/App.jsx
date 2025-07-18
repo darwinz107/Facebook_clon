@@ -1,16 +1,33 @@
 import { useState } from 'react'
 import { handlerApi } from './assets/connectionApi/Api'
+import { Link, useNavigate } from 'react-router-dom'
+import { validation } from './methods/validation'
+
 
 function App() {
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
 
+  const navigate = useNavigate();
+
+  const authorizedToken = async (e) =>{
+     e.preventDefault();
+    const token = await validation(email,password);
+
+    if(token != null){
+      localStorage.setItem("token",token)
+      navigate('/principal')
+    }
+
+}
+
+
   return (
     <>
-   
+   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_J0Hvb7GRs26Xv_LZYATWFCw4T7UHT7lvUw&s" alt=""/>
    <form  method="post"
    className='form'
-    onSubmit={(e)=>handlerApi(e,email,password)}
+    onSubmit={(e)=>authorizedToken(e)}
    >
     <div>
    <label htmlFor="email">Email: </label>
@@ -28,8 +45,9 @@ function App() {
    />
    </div>
    <br />
-   <button type="submit">Register</button>
-
+   <button type="submit"
+   >Login</button>
+   <p>You haven't an account? Register <Link to="/register" >here</Link></p>
    </form>
 
     </>
