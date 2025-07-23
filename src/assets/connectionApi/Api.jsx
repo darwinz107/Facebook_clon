@@ -2,8 +2,6 @@
 import { InferenceClient } from "@huggingface/inference";
 
 
-
-
 export const handlerApi = async (e,name,cellphone,email,password)=>{
 
     e.preventDefault();
@@ -131,8 +129,6 @@ export const generateImg = async (prompt)=>{
     return data
 
 }
-
-
 
 
 

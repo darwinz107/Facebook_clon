@@ -3,8 +3,10 @@
  
 export const validation = async (email,password) =>{
 
+
     localStorage.removeItem('token')
  try {
+
     const response = await fetch("http://localhost:3000/validation/validation",{
         method:"POST",
         headers:{
@@ -22,10 +24,11 @@ export const validation = async (email,password) =>{
     }else{
         return null
     }
+
  } catch (error) {
     console.log(error)
  }
-    
+
 }
 
 

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import {  Deepseek, generateImg, getTokenH } from '../assets/connectionApi/Api'
 
@@ -65,5 +66,6 @@ export const Authorized = () => {
     <img src={`data:image/png;base64,${imgJson.binary}`} alt="" /></div>
    </>
    
+
   )
 }
