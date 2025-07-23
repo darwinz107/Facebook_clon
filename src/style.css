@@ -1,3 +1,7 @@
+*{
+    padding: 0;
+    margin: 0;
+}
 .form{
 
 padding: 10px;
@@ -28,4 +32,62 @@ cursor: pointer;
 }
 .btnBack:hover{
 cursor: pointer;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(247, 167, 243);
+    
+}
+.navbar-list{
+    display: flex;
+    list-style: none;
+    
+    
+}
+
+.navbar-list li:hover{
+   background-color: rgb(238, 10, 238);
+    
+}
+
+.navbar-list li a {
+    text-decoration: none;
+    color: black;
+    padding: 20px;
+    
+}
+.navbar-list li a:hover{
+    
+    color: aquamarine;
+}
+
+.profile-bar{
+    
+    position: relative;
+    
+    
+}
+
+.profile-menu{
+    position: absolute;
+    right: 0;
+   
+    background-color: blue;
+    padding: 20px;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-menu button{
+    width: auto;
+    padding: 10px;
+    border-style: hidden;
+    background-color: turquoise;
+}
+.profile-menu button:hover{
+   cursor: pointer;
 }
