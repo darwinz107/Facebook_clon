@@ -19,6 +19,8 @@ img{
 }
 li:hover{
 color: aquamarine;
+
+cursor: pointer;
 }
 .btnBack{
     border-style: dashed;
