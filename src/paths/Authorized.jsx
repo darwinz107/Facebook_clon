@@ -1,12 +1,17 @@
 
 import React, { useState } from 'react'
-import {  Deepseek, generateImg, getTokenH } from '../assets/connectionApi/Api'
+import {  Deepseek, generateImg, getTokenH } from '../connectionApi/Api'
+import { setImg } from '../methods/funcionePendejas'
 
 export const Authorized = () => {
  
   const [prompt, setprompt] = useState("")
   const [textIA, settextIA] = useState("xd")
   const [imgJson, setimgJson] = useState("")
+  
+
+
+  
 
   const generateIA = async (e) =>{
   e.preventDefault()
@@ -22,13 +27,15 @@ export const Authorized = () => {
   const json = await generateImg(prompt)
   console.log(json)
   setimgJson(json)
-  document.getElementById('response').innerText = 'loading...'
   
   if (!json.text){
-    document.getElementById('response').innerText = 'Generated image succesful!'
-  
+    setImg(json);
+    document.getElementById('response').innerText = 'Generated image succesful!';
+    
+    
   }else{
   document.getElementById('responde').innerText = json.text}
+  
   }
   return (
    <>
@@ -61,9 +68,10 @@ export const Authorized = () => {
      <button type="submit">Enviar</button>
    </form>
     <br />
-    <div>
+    <div className='imgGenerate' id='imgGenerate'>
     <p id='response'></p>  
-    <img src={`data:image/png;base64,${imgJson.binary}`} alt="" /></div>
+    
+      </div>
    </>
    
 

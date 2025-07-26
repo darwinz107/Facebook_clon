@@ -1,6 +1,7 @@
 *{
     padding: 0;
     margin: 0;
+    
 }
 .form{
 
@@ -90,4 +91,8 @@ cursor: pointer;
 }
 .profile-menu button:hover{
    cursor: pointer;
+}
+
+.logoPrincipal{
+    border-radius: 50%;;
 }

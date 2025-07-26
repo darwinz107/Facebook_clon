@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react'
-import { registerApi } from '../assets/connectionApi/Api'
+
 import { Link, useNavigate } from 'react-router-dom'
+import { registerApi } from '../connectionApi/Api'
 
 
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { handlerApi } from './assets/connectionApi/Api'
+
 import { Link, useNavigate } from 'react-router-dom'
 import { validation } from './methods/validation'
 
@@ -25,7 +25,7 @@ function App() {
   return (
     <>
 
-   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_J0Hvb7GRs26Xv_LZYATWFCw4T7UHT7lvUw&s" alt=""/>
+   <img className='logoPrincipal' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_J0Hvb7GRs26Xv_LZYATWFCw4T7UHT7lvUw&s" alt=""/>
 
    {/*<img src="public\s-l400 (1).jpg" alt=""/>*/}
 

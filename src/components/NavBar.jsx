@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { validateRol } from '../methods/validateRol';
+
 
 export const NavBar = () => {
 
@@ -27,8 +29,8 @@ const logout = () =>{
       <ul className='navbar-list'>
         <li className='navbar-item' onClick={(e)=>autorizado(e)}
         style={{cursor: 'pointer'}}
-        >Autorizado</li>
-        <li className='navbar-item'><Link  to={'/noautorizado'}>IDK</Link></li>
+        >Only Admin</li>
+        <li className='navbar-item'><Link  to={'/noautorizado'}>Anybody</Link></li>
         
       </ul>
       <div className='profile-bar'>
