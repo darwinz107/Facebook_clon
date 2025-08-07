@@ -96,3 +96,30 @@ cursor: pointer;
 .logoPrincipal{
     border-radius: 50%;;
 }
+
+.container-register{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    text-align: center;
+    margin: auto;
+}
+
+.container-register input {
+    margin-bottom: 30px;
+    padding: 3px;
+}
+.container-register button {
+    margin-bottom: 30px;
+    padding: 5px;
+    cursor: pointer;
+}
+.dropDown {
+ text-align: center;
+ margin-bottom: 20px;
+  padding: 3px;
+}
+
+.dropDown option{
+    background-color: aquamarine;
+}

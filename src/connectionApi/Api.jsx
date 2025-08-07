@@ -21,9 +21,9 @@ export const handlerApi = async (e,name,cellphone,email,password)=>{
 
 }
 
-export const registerApi = async (e,name,cellphone,email,password)=>{
+export const registerApi = async (name,cellphone,email,password)=>{
 
-    e.preventDefault();
+   
 
     const response = await fetch("http://localhost:3000/app/register",{
         
@@ -36,10 +36,27 @@ export const registerApi = async (e,name,cellphone,email,password)=>{
 
     const data = await response.json()
     console.log(data)
-    alert("Register succesful")
+    if (response.ok){
+    return data}
+    else{
+        return "Register failed! Try it again"
+    }
 
 }
 
+export const resgisterUserNest = async (name,cellphone,email,password,gender) =>{
+
+    const response = await fetch("http://localhost:3000/user/create",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({name,cellphone,gender,email,password})
+    });
+
+    const data = await response.text();
+    return alert(data);
+}
 
 export const getTokenH = async ()=>{
 

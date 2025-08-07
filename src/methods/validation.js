@@ -1,7 +1,7 @@
 
 
  
-export const validation = async (email,password) =>{
+export const validation = async (email,password) =>{ 
 
 
     localStorage.removeItem('token')
@@ -29,6 +29,23 @@ export const validation = async (email,password) =>{
     console.log(error)
  }
 
+}
+
+
+ export  const  validationUserNest = async (email,password) =>{
+
+    
+ 
+    const response = await fetch("http://localhost:3000/user/validate/login",{
+     method:'POST',
+     headers:{
+        'Content-Type':'application/json'
+     },
+     body: JSON.stringify({email,password})
+    });
+
+    const data = response.json();
+    return data;
 }
 
 
