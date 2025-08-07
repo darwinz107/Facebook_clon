@@ -29,10 +29,10 @@ const authLoginNest = async (e) =>{
 
   if(res.acces){
    alert(res.message)
-   console.log(res.id)
+   
    const token = await generateTokenNest(res.id)
-    console.log(token)
-    localStorage.setItem("token",token.token)
+    console.log(token.token)
+    
   }else{
     alert(res.message)
     

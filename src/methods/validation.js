@@ -1,11 +1,8 @@
 
 
  
-export const validation = async (email,password) =>{ 
+export const validation = async (email,password) =>{
 
-
-    localStorage.removeItem('token')
- try {
 
     const response = await fetch("http://localhost:3000/validation/validation",{
         method:"POST",
@@ -24,28 +21,6 @@ export const validation = async (email,password) =>{
     }else{
         return null
     }
-
- } catch (error) {
-    console.log(error)
- }
-
-}
-
-
- export  const  validationUserNest = async (email,password) =>{
-
-    
- 
-    const response = await fetch("http://localhost:3000/user/validate/login",{
-     method:'POST',
-     headers:{
-        'Content-Type':'application/json'
-     },
-     body: JSON.stringify({email,password})
-    });
-
-    const data = response.json();
-    return data;
 }
 
 

@@ -1,9 +1,9 @@
 
 export const generateTokenNest = async(id:number) =>{
-  
-    localStorage.removeItem('token');
+   
     const response = await fetch(`http://localhost:3000/user/token/${id}`,{
-     method: 'GET'
+     method: 'GET',
+     credentials:'include'
     });
 
     const data = await response.json();
