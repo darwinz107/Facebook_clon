@@ -1,7 +1,7 @@
 import { useState } from 'react'
-
 import { Link, useNavigate } from 'react-router-dom'
-import { validation } from './methods/validation'
+import { validation, validationUserNest } from './methods/validation'
+import { generateTokenNest } from './methods/token'
 
 
 function App() {
@@ -15,10 +15,28 @@ function App() {
     const token = await validation(email,password);
 
     if(token != null){
+      
       localStorage.setItem("token",token)
       navigate('/principal')
+      console.log(`This is token: ${localStorage.getItem("token")}`)
     }
 
+}
+
+const authLoginNest = async (e) =>{
+  e.preventDefault();
+  const res = await validationUserNest(email,password);
+
+  if(res.acces){
+   alert(res.message)
+   console.log(res.id)
+   const token = await generateTokenNest(res.id)
+    console.log(token)
+    localStorage.setItem("token",token.token)
+  }else{
+    alert(res.message)
+    
+  }
 }
 
 
@@ -31,7 +49,7 @@ function App() {
 
    <form  method="post"
    className='form'
-    onSubmit={(e)=>authorizedToken(e)}
+    onSubmit={(e)=>authLoginNest(e)}
    >
     <div>
    <label htmlFor="email">Email: </label>

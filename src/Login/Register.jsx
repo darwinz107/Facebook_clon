@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react'
-
+import {DropNow} from '../components/DropNow'
 import { Link, useNavigate } from 'react-router-dom'
-import { registerApi } from '../connectionApi/Api'
+import { registerApi, resgisterUserNest } from '../connectionApi/Api'
 
 
 
@@ -12,8 +12,14 @@ export const Register = () => {
     const [celllphone, setcelllphone] = useState("")
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
-
+    const [gender, setgender] = useState("")
     const navigate = useNavigate();
+
+
+    const validateRegister = async (e) =>{
+     e.preventDefault();
+    const msg = await resgisterUserNest(name,celllphone,email,password,gender)
+    }
 
   return (
    
@@ -23,10 +29,10 @@ export const Register = () => {
    ()=>navigate('/login')
  }
  >Back</button>
-<form  method="post"
-onSubmit={(event) =>registerApi(event,name,celllphone,email,password)}
+<form   method="post"
+onSubmit={(e) =>validateRegister(e)}
 >
- 
+ <div className='container-register'>
  <label htmlFor="name">Name: </label>
  <input type="name" 
  onChange={(e)=>setname(e.target.value)}
@@ -46,11 +52,13 @@ onSubmit={(event) =>registerApi(event,name,celllphone,email,password)}
  <input type="password" name="password" id="password" 
  onChange={(e)=>setpassword(e.target.value)}
  />
-
+  <DropNow gender={gender} setgender={setgender}></DropNow>
   <button type="submit"
   onClick={()=>console.log("Hiciste click a enviar")}
   >Register</button>
+  </div>
 </form>
+
 </>
 
     
