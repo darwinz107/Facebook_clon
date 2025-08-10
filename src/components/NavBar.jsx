@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { validateRol } from '../methods/validateRol';
+import { deleteTokenNest, validateRolNest } from '../methods/token';
 
 
 export const NavBar = () => {
@@ -10,16 +11,20 @@ const [showMenu, setshowMenu] = useState(false);
 const navigate = useNavigate();
 const handleProfileBar = () => setshowMenu(!showMenu);
 
-const logout = () =>{
-    localStorage.removeItem("token");
+const logout = async () =>{
+   const msj = await deleteTokenNest();
+    alert(msj.session);
     navigate('/login');
 }
-    const autorizado = (e) =>{
+    const autorizado = async (e) =>{
         e.preventDefault()
         
-        const isValidated = validateRol();
-        if(isValidated == true){
+        const isValidated = await validateRolNest();
+        console.log(isValidated.acess);
+        if(isValidated.acess){
          navigate('/autorizado');
+        }else{
+          alert("You are not authorized to access this page");
         }
     }
 

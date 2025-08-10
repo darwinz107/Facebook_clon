@@ -31,7 +31,7 @@ const authLoginNest = async (e) =>{
    alert(res.message)
    
    const token = await generateTokenNest(res.id)
-    console.log(token.token)
+    navigate('/principal')
     
   }else{
     alert(res.message)
