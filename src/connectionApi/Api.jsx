@@ -124,8 +124,35 @@ const chatCompletion = await client.chatCompletion({
 });
 
 
+
 console.log(chatCompletion.choices[0].message);
 return chatCompletion.choices[0].message.content;
+}
+
+export const DeepseekNest = async (prompt) =>{
+  
+    const response = await fetch("http://localhost:3000/user/deepseek",{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({prompt})
+    });
+    const data = await response.json();
+    return data;
+}
+
+export const geminiNest = async (prompt) =>{
+    
+    const response = await fetch("http://localhost:3000/user/gemini",{
+     method:'POST',
+     headers:{
+        'Content-Type':'application/json'
+     },
+     body:JSON.stringify({prompt})
+    });
+    const data = await response.json();
+    return data;
 }
 
 export const generateImg = async (prompt)=>{

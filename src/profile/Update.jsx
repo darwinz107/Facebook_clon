@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { generateInfoUser, updateInfoUser } from '../methods/profile'
+import { generateInfoUser, updateInfoNest, updateInfoUser, updateProfileNest } from '../methods/profile'
+import { DropNow } from '../components/DropNow'
+import { generateTokenNest, logout } from '../methods/token'
 
 export const Update =  () => {
 
@@ -8,26 +10,32 @@ export const Update =  () => {
 const [name, setname] = useState("")
   const [cellphone, setcellphone] = useState("")
   const [email, setemail] = useState("")
-
+  const [gender, setgender] = useState("")
 
 const functionUpdate = async (e) =>{
  e.preventDefault();
-  const data = await updateInfoUser(name,cellphone,email);
-  localStorage.removeItem('token');
-  console.log(data)
-  localStorage.setItem("token",data);
+   const msj = await updateProfileNest(name,cellphone,email,gender);
+
+   alert(msj.message);
+   const id = msj.id;
+
+   logout();
+   generateTokenNest(id);
+
 }
 
 
  useEffect(() => {
-  const fetchData = async () =>{
-   const info = await generateInfoUser();
-   setname(info.name);
-   setcellphone(info.cellphone);
-   setemail(info.email);
-console.log(info);
-};
-fetchData();
+  const setInfo = async() =>{
+    const payload = await updateInfoNest();
+    console.log(payload)
+    setname(payload.name);
+    setcellphone(payload.cellphone);
+    setemail(payload.email);
+    setgender(payload.gender);
+  };
+
+  setInfo();
  }, []);
  
   return (
@@ -51,6 +59,8 @@ fetchData();
       onChange={(e)=>setemail(e.target.value)}
       />
       <br />
+      <DropNow gender={gender} setgender={setgender}></DropNow>
+      
       <button type="submit">Update</button>
 
      </form>

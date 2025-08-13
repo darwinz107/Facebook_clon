@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { validateRol } from '../methods/validateRol';
+import { validateRol, validateRolNest } from '../methods/validateRol';
+import { logout } from '../methods/token';
 
 
 export const NavBar = () => {
@@ -10,15 +11,17 @@ const [showMenu, setshowMenu] = useState(false);
 const navigate = useNavigate();
 const handleProfileBar = () => setshowMenu(!showMenu);
 
-const logout = () =>{
-    localStorage.removeItem("token");
-    navigate('/login');
+const logoutSession = async () =>{
+   const msj = await logout();
+   alert(msj.session);
+   navigate('/login')
 }
-    const autorizado = (e) =>{
+    const autorizado = async(e) =>{
         e.preventDefault()
         
-        const isValidated = validateRol();
-        if(isValidated == true){
+        const isValidated = await validateRolNest();
+        console.log(isValidated);
+        if(isValidated.acess == true){
          navigate('/autorizado');
         }
     }
@@ -43,7 +46,7 @@ const logout = () =>{
         {showMenu && (
             <div className='profile-menu'>
                 <button onClick={()=>navigate('/updateProfile')}>Update profile</button>
-                <button onClick={logout}>Logout</button>
+                <button onClick={logoutSession}>Logout</button>
             </div>
         )}
       </div>

@@ -28,10 +28,11 @@ const authLoginNest = async (e) =>{
   const res = await validationUserNest(email,password);
 
   if(res.acces){
-   alert(res.message)
-   
-   const token = await generateTokenNest(res.id)
-    console.log(token.token)
+   alert(res.message);
+   console.log(res.id);
+   const token = await generateTokenNest(res.id);
+    console.log(token.token);
+    navigate('/principal')
     
   }else{
     alert(res.message)
