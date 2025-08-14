@@ -1,16 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { geminiNest } from '../connectionApi/Api';
+import { SideComments } from './sideComments';
+
 
 export const PostCards = ({post}) => {
 const postDiv = `postDiv${post.id}`;
+
+  const peopleComment = [
+  {
+   id:1,
+   name:'Ana Lopez',
+    avatar: "https://img.icons8.com/?size=100&id=7819&format=png&color=000000",
+   comment: 'This is amazing!'
+  },
+  {
+id:2,
+   name:'Alejandro Zapato',
+    avatar: "https://img.icons8.com/?size=100&id=7819&format=png&color=000000",
+   comment: 'I love your post'
+  }];
 
    useEffect(  () => {
      
     const generateImageIA = async () =>{
       
      
-      const json = await geminiNest("Generate any image");
+      const json = await geminiNest("Generate any image from smite the videogame");
     
        const img = document.createElement('img');
        img.src =`data:image/jpeg;base64,${json.binary}`;
@@ -25,7 +41,9 @@ const postDiv = `postDiv${post.id}`;
      
    }, []);
    
-
+  const [comments, setcomments] = useState(false);
+  
+  const showComments = () => setcomments(!comments);
     
 
   return (
@@ -45,6 +63,23 @@ const postDiv = `postDiv${post.id}`;
     
     <div>{post.content}</div>
 </div>
+   <div className='countLikes'>
+    <div>{post.likes} likes</div>
+    <div><button onClick={
+        showComments}>{post.comments} comments</button> </div>
+   </div>
+   <div className='navInteraction'>
+    <div><button>👍 Like</button>
+       <button >🗨 comment</button>
+    </div>
+    {comments &&(
+      peopleComment.map((person) =>(
+       <SideComments key={person.id} person={person}></SideComments>
+      )
+
+      )
+    )}
+   </div>
     </div>
     </>
   )

@@ -3,17 +3,15 @@
     margin: 0;
     
 }
+
+
 .form{
 
 padding: 10px;
 text-align: center;    
 }
 
-div{
-    position: relative;
-    margin: 10px;
 
-}
 img{
 
     width: 250px;
@@ -183,4 +181,43 @@ background-color: aqua;
    margin: auto;
    padding: 10px;
    
+}
+
+.countLikes{
+    
+     display: flex;
+     justify-content: space-between;
+}
+
+.countLikes button{
+
+  border: none;
+  cursor: pointer; 
+  background-color: white;
+}
+.navInteraction button{
+    padding: 8px;
+    padding-left: 15px;
+    border: none;
+}
+
+.navInteraction button:hover{
+cursor: pointer;
+background-color: #ccc;
+font-size: large;
+}
+
+.postcardInstancia .postcard-div{
+    margin-bottom: 50px;
+}
+
+.profile-sideComments img{
+   width: 10px;
+   height: auto;
+   margin-left: 0;
+   
+}
+
+.profile-sideComments{
+    display: flex;
 }

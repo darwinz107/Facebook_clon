@@ -27,14 +27,15 @@ export const FeedPreview = () => {
     }
   ];
 
+
   return (
     <>
     <StoriesPreview/>
+    <div className='postcardInstancia'>
     {fakePosts.map((post)=>(
      <PostCards key={post.id} post={post} />   
-    )
-        
-    )}
+    )      
+    )}</div>
     </>
   )
 }
