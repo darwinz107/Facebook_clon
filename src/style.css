@@ -123,3 +123,64 @@ cursor: pointer;
 .dropDown option{
     background-color: aquamarine;
 }
+
+
+.navbarNot{
+    display: flex;
+    background-color: gray;
+    justify-content: space-between;
+    
+}
+
+.navbarNot-list{
+    display: flex;
+    list-style: none;
+}
+.navbarNot img{
+    height: 40px;
+    width: 30px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+.navbarNot-item{
+    margin-left: 40px;
+}
+.navbarNot-btn{
+    padding: 10px;
+}
+.navbarNot-item:hover{
+background-color: aqua;
+}
+
+.postcard-div{
+    border: 1px solid #ccc;
+   
+    width: 60%;;
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.profile-div{
+    display: flex;
+  
+}
+
+.profile-div img{
+    width: 30px;
+    height: auto;
+    margin-left: 0;
+}
+
+.post-div{
+   
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+  
+}
+
+.post-div img{
+   margin: auto;
+   padding: 10px;
+   
+}

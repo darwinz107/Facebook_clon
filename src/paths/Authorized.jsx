@@ -34,7 +34,7 @@ export const Authorized = () => {
     
     
 
-   const img = document.createElement('img').src(`data:image/jpeg;base64,${json.binary}`);
+   const img = document.createElement('img').src =`data:image/jpeg;base64,${json.binary}`;
    document.getElementById('response').appendChild(img);
   }else{
   document.getElementById('response').innerText = json.text}
