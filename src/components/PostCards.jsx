@@ -65,20 +65,24 @@ id:2,
 </div>
    <div className='countLikes'>
     <div>{post.likes} likes</div>
-    <div><button onClick={
-        showComments}>{post.comments} comments</button> </div>
-   </div>
-   <div className='navInteraction'>
-    <div><button>👍 Like</button>
-       <button >🗨 comment</button>
-    </div>
-    {comments &&(
-      peopleComment.map((person) =>(
+    <div className='side-comment'><button onClick={
+        showComments}>{post.comments} comments</button>
+        {comments &&(
+         <div className='side-comment-child'>
+      {peopleComment.map((person) =>(
        <SideComments key={person.id} person={person}></SideComments>
       )
-
-      )
+      )}
+      </div>
     )}
+         </div>
+   </div>
+   <div className='navInteraction'>
+    <div>
+      <button>👍 Like</button>    
+       <button >🗨 comment</button>             
+    </div>
+    
    </div>
     </div>
     </>
