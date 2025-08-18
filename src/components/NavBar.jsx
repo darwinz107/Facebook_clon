@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { validateRol } from '../methods/validateRol';
-import { deleteTokenNest, validateRolNest } from '../methods/token';
+import { validateRol, validateRolNest } from '../methods/validateRol';
+import { logout } from '../methods/token';
 
 
 export const NavBar = () => {
@@ -11,17 +11,17 @@ const [showMenu, setshowMenu] = useState(false);
 const navigate = useNavigate();
 const handleProfileBar = () => setshowMenu(!showMenu);
 
-const logout = async () =>{
-   const msj = await deleteTokenNest();
-    alert(msj.session);
-    navigate('/login');
+const logoutSession = async () =>{
+   const msj = await logout();
+   alert(msj.session);
+   navigate('/login')
 }
-    const autorizado = async (e) =>{
+    const autorizado = async(e) =>{
         e.preventDefault()
         
         const isValidated = await validateRolNest();
-        console.log(isValidated.acess);
-        if(isValidated.acess){
+        console.log(isValidated);
+        if(isValidated.acess == true){
          navigate('/autorizado');
         }else{
           alert("You are not authorized to access this page");
@@ -48,7 +48,7 @@ const logout = async () =>{
         {showMenu && (
             <div className='profile-menu'>
                 <button onClick={()=>navigate('/updateProfile')}>Update profile</button>
-                <button onClick={logout}>Logout</button>
+                <button onClick={logoutSession}>Logout</button>
             </div>
         )}
       </div>

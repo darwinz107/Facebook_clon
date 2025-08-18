@@ -16,3 +16,13 @@ export const validateRol = () =>{
         return false
     }
 }
+
+export const validateRolNest = async () =>{
+    const response = await fetch("http://localhost:3000/user/rol",{
+        method:'GET',
+        credentials:'include'
+    });
+
+    const data = await response.json();
+    return data;
+}

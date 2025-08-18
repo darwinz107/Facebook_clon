@@ -3,17 +3,15 @@
     margin: 0;
     
 }
+
+
 .form{
 
 padding: 10px;
 text-align: center;    
 }
 
-div{
-    position: relative;
-    margin: 10px;
 
-}
 img{
 
     width: 250px;
@@ -122,4 +120,174 @@ cursor: pointer;
 
 .dropDown option{
     background-color: aquamarine;
+}
+
+
+.navbarNot{
+    display: flex;
+    background-color: gray;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.navbarNot-list{
+    display: flex;
+    list-style: none;
+}
+.navbarNot img{
+    height: 40px;
+    width: 30px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+.navbarNot-item{
+    margin-left: 40px;
+}
+.navbarNot-btn{
+    padding: 10px;
+}
+.navbarNot-item:hover{
+background-color: aqua;
+}
+
+.postcard-div{
+    border: 1px solid #ccc;
+   
+    width: 60%;;
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.profile-div{
+    display: flex;
+  
+}
+
+.profile-div img{
+    width: 30px;
+    height: auto;
+    margin-left: 0;
+}
+
+.post-div{
+   
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+  
+}
+
+.post-div img{
+   margin: auto;
+   padding: 10px;
+   
+}
+
+.countLikes{
+    
+     display: flex;
+     justify-content: space-between;
+}
+
+.countLikes button{
+
+  border: none;
+  cursor: pointer; 
+  background-color: white;
+}
+
+
+.navInteraction button{
+    padding: 8px;
+    padding-left: 15px;
+    border: none;
+}
+
+.navInteraction button:hover{
+cursor: pointer;
+background-color: #ccc;
+font-size: large;
+}
+
+.postcardInstancia .postcard-div{
+    margin-bottom: 50px;
+}
+
+.side-comment{
+    position: relative;
+}
+
+.side-comment-child{
+    position: absolute;
+    
+    border: 1px solid #ccc;
+    width: max-content;
+}
+
+.profile-sideComments img{
+   width: 10px;
+   height: auto;
+   margin-left: 0;
+   
+}
+
+.profile-sideComments{
+    display: flex;
+    
+}
+
+.container-alert-login{
+    position: fixed;
+    width:80%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+    display: flex;
+    flex-direction: column;
+    border: 2px solid gray;
+    background-color: rgba(0,0,0,0.5);
+   
+    
+   
+}
+
+.container-stories{
+    border: 2px solid black;
+    width: 60%;
+    height: 250px;
+    margin: auto;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.statu-child{
+    width: 30%;
+    height: 100%;
+    border: 2px solid red;
+    border-radius: 1%;
+    
+}
+
+.container-stories button{
+  margin: auto;
+}
+
+
+.statu-child video{
+   
+   width: 100%;
+   height: 100%;
+   border-radius: 1%;
+   background-color: black;
+}
+
+.statu-child img{
+   
+   width: 100%;
+   height: 100%;
+   border-radius: 1%;
+   background-color: black;
+   margin-left: 0;
 }

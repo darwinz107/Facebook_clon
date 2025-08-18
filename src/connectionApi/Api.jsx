@@ -76,7 +76,7 @@ export const getTokenH = async ()=>{
 
 }
 
-export const chatIA = async(prompts,token) =>{
+export const chatIA=async (prompts,token)=>{
 
    
   const response = await  fetch("https://api-inference.huggingface.co/models/facebook/bart-large-cnn",{
@@ -124,8 +124,35 @@ const chatCompletion = await client.chatCompletion({
 });
 
 
+
 console.log(chatCompletion.choices[0].message);
 return chatCompletion.choices[0].message.content;
+}
+
+export const DeepseekNest = async (prompt) =>{
+  
+    const response = await fetch("http://localhost:3000/user/deepseek",{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({prompt})
+    });
+    const data = await response.json();
+    return data;
+}
+
+export const geminiNest = async (prompt) =>{
+    
+    const response = await fetch("http://localhost:3000/user/gemini",{
+     method:'POST',
+     headers:{
+        'Content-Type':'application/json'
+     },
+     body:JSON.stringify({prompt})
+    });
+    const data = await response.json();
+    return data;
 }
 
 export const generateImg = async (prompt)=>{
@@ -142,10 +169,29 @@ export const generateImg = async (prompt)=>{
         
     });
 
-    const data = response.json()
+    const data = await response.json()
     return data
 
 }
 
+export const redtubeAPI = async() =>{
+
+ const response = await fetch("http://localhost:3000/user/redtube",{
+  method:'GET'
+ });
+
+ const data = await response.json();
+
+ return data;
+}
 
 
+export const apiTestVideos = async() =>{
+    const response = await fetch("http://localhost:3000/user/generate/imgStorie",{
+        method:'GET'
+    });
+
+    const data = await response.json();
+
+    return data;
+}

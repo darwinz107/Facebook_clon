@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import {  Deepseek, generateImg, getTokenH } from '../connectionApi/Api'
+import {  Deepseek, DeepseekNest, geminiNest, generateImg, getTokenH } from '../connectionApi/Api'
 import { setImg } from '../methods/funcionePendejas'
 
 export const Authorized = () => {
@@ -15,16 +15,16 @@ export const Authorized = () => {
 
   const generateIA = async (e) =>{
   e.preventDefault()
-   const HF_TOKEN = await getTokenH();
-   const result = await Deepseek(prompt,HF_TOKEN)
-   const text = result.split("</think>")
+   
+   const result = await DeepseekNest(prompt)
+   const text = result.message.split("</think>")
    console.log(text);
    settextIA(text[1].trim());
    
   }
   const generateImageIA = async (e) =>{
   e.preventDefault()
-  const json = await generateImg(prompt)
+  const json = await geminiNest(prompt)
   console.log(json)
   setimgJson(json)
   
@@ -33,8 +33,11 @@ export const Authorized = () => {
     document.getElementById('response').innerText = 'Generated image succesful!';
     
     
+
+   const img = document.createElement('img').src =`data:image/jpeg;base64,${json.binary}`;
+   document.getElementById('response').appendChild(img);
   }else{
-  document.getElementById('responde').innerText = json.text}
+  document.getElementById('response').innerText = json.text}
   
   }
   return (

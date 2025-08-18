@@ -30,3 +30,34 @@ const decoded = jwtDecode(token);
     return response.json()
 
 }
+
+export const updateInfoNest = async () =>{
+
+    const response = await fetch("http://localhost:3000/user/insert/infoUpdate",{
+     method:'GET',
+     credentials:'include'
+    });
+
+    const data =await response.json();
+    return data;
+}
+
+export const updateProfileNest = async (name,cellphone,email,gender) =>{
+
+    const response = await fetch("http://localhost:3000/user/update",{
+        method:'PATCH',
+        credentials:'include',
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            name,
+            cellphone,
+            email,
+            gender
+        })
+    });
+
+    const data = await response.json();
+    return data;
+}

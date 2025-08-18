@@ -8,6 +8,8 @@ import { Principal } from './Login/Principal.jsx'
 import { Authorized } from './paths/Authorized.jsx'
 import { NoAuthorized } from './paths/NoAuthorized.jsx'
 import { Update } from './profile/Update.jsx'
+import { NavBarNotLogin } from './components/NavBarNotLogin.jsx'
+import { AppPreview } from './AppPreview.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -15,6 +17,7 @@ createRoot(document.getElementById('root')).render(
     <Routes>
       <Route path = "/" element={<App/>}></Route>
       <Route path='/login' element={<App/>}></Route>
+      <Route path='/notlogin' element={<AppPreview/>}></Route>
       <Route path = "/register" element={<Register/>} ></Route>
       <Route path='/principal' element={<Principal/>}></Route>
       <Route path='/autorizado' element={<Authorized/>}></Route>

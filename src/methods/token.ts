@@ -10,23 +10,10 @@ export const generateTokenNest = async(id:number) =>{
     return data;
 }
 
-export const validateRolNest = async() =>{
- 
-    const response = await fetch("http://localhost:3000/user/rol",{
-        method: 'GET',
-        credentials:'include'
-    });
-
-    const data = await response.json();
-    return data;
-   
-}
-
-export const deleteTokenNest = async()=>{
-
+export const logout = async() =>{
     const response = await fetch("http://localhost:3000/user/logout",{
-     method:'GET',
-     credentials:'include'
+        method:'GET',
+        credentials:'include'
     });
 
     const data = await response.json();
