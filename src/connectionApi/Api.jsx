@@ -76,7 +76,7 @@ export const getTokenH = async ()=>{
 
 }
 
-export const chatIA = async(prompts,token) =>{
+export const chatIA=async (prompts,token)=>{
 
    
   const response = await  fetch("https://api-inference.huggingface.co/models/facebook/bart-large-cnn",{
@@ -169,10 +169,20 @@ export const generateImg = async (prompt)=>{
         
     });
 
-    const data = response.json()
+    const data = await response.json()
     return data
 
 }
 
+export const redtubeAPI = async() =>{
+
+ const response = await fetch("http://localhost:3000/user/redtube",{
+  method:'GET'
+ });
+
+ const data = await response.json();
+
+ return data;
+}
 
 

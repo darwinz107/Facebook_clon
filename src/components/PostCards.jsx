@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { geminiNest } from '../connectionApi/Api';
 import { SideComments } from './sideComments';
+import { WindowLogin } from './WindowLogin';
 
 
 export const PostCards = ({post}) => {
@@ -20,7 +21,7 @@ id:2,
     avatar: "https://img.icons8.com/?size=100&id=7819&format=png&color=000000",
    comment: 'I love your post'
   }];
-
+/*
    useEffect(  () => {
      
     const generateImageIA = async () =>{
@@ -39,12 +40,18 @@ id:2,
        generateImageIA();
        
      
-   }, []);
+   }, []);*/
    
   const [comments, setcomments] = useState(false);
   
   const showComments = () => setcomments(!comments);
     
+  const [inputComment, setinputComment] = useState(false);
+
+  const showInputComment = () => setinputComment(!inputComment);
+
+  const [showWindowToLogin, setshowWindowToLogin] = useState(false)
+  const sshowWindowToLogin = () => setshowWindowToLogin(true);
 
   return (
     <>
@@ -79,12 +86,23 @@ id:2,
    </div>
    <div className='navInteraction'>
     <div>
-      <button>👍 Like</button>    
-       <button >🗨 comment</button>             
+      <button onClick={sshowWindowToLogin}>👍 Like</button>    
+       <button onClick={showInputComment}>🗨 comment</button>             
     </div>
-    
+     {inputComment &&(
+      <div>
+        <input type="text"/>
+        <button onClick={sshowWindowToLogin}>send</button>
+      </div>
+     )}
    </div>
+
+
+    
     </div>
+       {showWindowToLogin &&(
+<WindowLogin showLogin={showWindowToLogin}  close={setshowWindowToLogin}></WindowLogin>
+    )}
     </>
   )
 }

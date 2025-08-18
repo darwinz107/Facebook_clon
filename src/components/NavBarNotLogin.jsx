@@ -1,6 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const NavBarNotLogin = () => {
+ 
+  const navigate = useNavigate();
+
   return (
    <>
    <nav className='navbarNot'>
@@ -21,7 +25,7 @@ export const NavBarNotLogin = () => {
         <li className='navbarNot-item'><img src="https://img.icons8.com/?size=100&id=2878&format=png&color=000000" alt="" /></li>
     </ul>
      
-    <button className='navbarNot-btn'>Login</button>
+    <button className='navbarNot-btn' onClick={()=>navigate('/login')}>Login</button>
    </nav>
    </>
   )

@@ -127,7 +127,7 @@ cursor: pointer;
     display: flex;
     background-color: gray;
     justify-content: space-between;
-    
+    margin-bottom: 10px;
 }
 
 .navbarNot-list{
@@ -234,4 +234,49 @@ font-size: large;
 .profile-sideComments{
     display: flex;
     
+}
+
+.container-alert-login{
+    position: fixed;
+    width:80%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+    display: flex;
+    flex-direction: column;
+    border: 2px solid gray;
+    background-color: rgba(0,0,0,0.5);
+   
+    
+   
+}
+
+.container-stories{
+    border: 2px solid black;
+    width: 60%;
+    height: 250px;
+    margin: auto;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.statu-child{
+    width: 30%;
+    height: 100%;
+    border: 2px solid red;
+    border-radius: 20%;
+    
+}
+
+.container-stories button{
+  margin: auto;
+}
+
+.statu-child iframe{
+   width: 100%;
+   height: 100%;
+   border-radius: 20%;
+   
 }
