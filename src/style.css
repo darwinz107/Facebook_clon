@@ -321,3 +321,82 @@ padding-top: 15%;
    background-color: black;
    margin-left: 0;
 }
+
+.barChat{
+    position: fixed;
+    background-color: antiquewhite;
+    width: 15%;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    padding-top: 15px;
+    border-radius: 10%;
+}
+
+.barChatShow{
+    position: fixed;
+   
+    background-color: antiquewhite;
+    width: 15%;
+    height: 90%;
+    right: 0;
+    bottom: 0;
+    
+    
+    border-top-right-radius: 10%;
+    border-top-left-radius: 10% ;
+    
+}
+.x{
+cursor: pointer;
+}
+
+.barChatShow .x{
+margin-left: 85%;
+margin-bottom: 30px;
+
+}
+
+.chats{
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.chats:hover{
+    background-color: darkgray;
+}
+
+.chatOpen{
+     position: fixed;
+   
+    background-color: antiquewhite;
+    width: 17%;
+    height: 40%;
+    right: 250px;
+    bottom: 0;
+    
+    overflow: scroll;
+    border-top-right-radius: 10%;
+    border-top-left-radius: 10% ;
+}
+
+.chatUp{
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    
+}
+.chatdown{
+    
+    margin-top: 95%;
+    
+}
+
+.chefsito{
+    width: 100%;
+   
+    background-color: aqua;
+}
+

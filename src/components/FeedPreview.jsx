@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
-import { apiTestVideos, redtubeAPI } from '../connectionApi/Api';
+import { apiTestVideos, DeepseekNest, redtubeAPI } from '../connectionApi/Api';
 
 export const FeedPreview = () => {
   
-  const [links, setlinks] = useState([])   
+  const [links, setlinks] = useState([]) 
+  const [limitMove, setlimitMove] = useState(0)
+  const [showChat, setshowChat] = useState(false)
+  const [chatOpen, setchatOpen] = useState(false)
+  const [message, setmessage] = useState("")
+  const [resIA, setresIA] = useState("")
+
    useEffect(  () => {
    /* const idk = async ()=>{
        const datas = await redtubeAPI();
@@ -43,15 +49,30 @@ export const FeedPreview = () => {
    }, [])
    
    const moveStories = () =>{
-     document.querySelector('.container-flex').style.transform = "translateX(-500px)"
+     //document.querySelector('.container-flex').style.transform = "translateX(-500px)"
+     setlimitMove((prev)=>Math.max(prev - 300,-(links.length - 2)*300));
     
    }
 
   const constBackStories = () =>{
-    document.querySelector('.container-flex').style.transform = "translateX(300px)"
+    //document.querySelector('.container-flex').style.transform = "translateX(300px)"
+    setlimitMove((prev)=>Math.min(prev+300,0));
    }
 
 
+   const functionShowChat = () =>{
+    setshowChat(!showChat);
+   }
+
+   const functionChatOpen = () =>{
+    setchatOpen(!chatOpen);
+   }
+
+   const sendChefsito = async () =>{
+    const response = await DeepseekNest(message);
+    const msj = response.message.split("</think>");
+    setresIA(msj[1].trim());
+   }
      const fakePosts = [
     {
       id: 1,
@@ -80,7 +101,11 @@ export const FeedPreview = () => {
   return (
     <>
     <div className='container-stories'>
-      <div className='container-flex'>
+      <div className='container-flex'
+      style={{
+       transform: `translateX(${limitMove}px)`
+      }}
+      >
      {links.map((link)=>(
 <StoriesPreview key={link} indice={link}/>
      ))}
@@ -98,6 +123,27 @@ export const FeedPreview = () => {
      <PostCards key={post.id} post={post} />   
     )      
     )}</div>
+    {!showChat&&(<div className='barChat' onClick={functionShowChat}>chats</div>)}
+    {showChat&&( <div className='barChatShow'>
+      <div className='x' onClick={functionShowChat}>x</div>
+      <div className='chats'>julio69 ❌</div>
+      <div className='chats'>baxter69 ❌</div>
+      <div className='chats' onClick={functionChatOpen}>chefsitogpt ✅</div>
+    </div>)}
+
+    {chatOpen &&<div className='chatOpen'>
+        <div className='chatUp'>
+      <div>chefsitogpt</div>
+      <div className='x' onClick={functionChatOpen}>x</div></div>
+      <div className='chefsito'>{resIA}</div>
+      <div className='chatdown'>
+        <input type="text"
+        onChange={(e)=>setmessage(e.target.value)}
+        />
+           <button onClick={sendChefsito}>send</button>
+      </div>
+    </div>
+}
     </>
   )
 }
