@@ -253,27 +253,56 @@ font-size: large;
    
 }
 
+
 .container-stories{
+      position: relative;
     border: 2px solid black;
-    width: 60%;
+    width: 810px;
     height: 250px;
     margin: auto;
     margin-bottom: 10px;
-    display: flex;
+    overflow: hidden;
+   
+}
+
+.container-flex{
+  
+display: flex;
+width: 1050px;
+height: 100%;
+transition: transform 0.3s ease ;
+
 }
 
 .statu-child{
-    width: 30%;
-    height: 100%;
+   width: 40%;
     border: 2px solid red;
     border-radius: 1%;
     
 }
 
-.container-stories button{
-  margin: auto;
+.btnNext{
+  
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 15%;
+  padding-bottom: 15%;
+  border-style: none;
+  background-color: azure;
+  cursor: pointer;
 }
 
+.btnBack{
+    position: absolute;
+  top: 0;
+  left: 0;
+padding-top: 15%;
+  padding-bottom: 15%;
+  border-style: none;
+  background-color: azure;
+  cursor: pointer;
+}
 
 .statu-child video{
    
@@ -281,6 +310,7 @@ font-size: large;
    height: 100%;
    border-radius: 1%;
    background-color: black;
+   cursor: pointer;
 }
 
 .statu-child img{

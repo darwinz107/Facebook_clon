@@ -43,6 +43,7 @@ export const StoriesPreview = ({ indice }) => {
    };
 
    executeFunction();
+   
  }, [indice])
  
 

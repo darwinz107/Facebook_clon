@@ -28,7 +28,7 @@ export const FeedPreview = () => {
      const randoms = new Set();
      const array = [];
 
-     for (let index = 1; index < 4; index++) {
+     for (let index = 1; index < 7; index++) {
       const id = Math.floor(Math.random()* (videos.length - 1)+1);
       randoms.add(id);   
      };
@@ -42,6 +42,15 @@ export const FeedPreview = () => {
      idk2();
    }, [])
    
+   const moveStories = () =>{
+     document.querySelector('.container-flex').style.transform = "translateX(-500px)"
+    
+   }
+
+  const constBackStories = () =>{
+    document.querySelector('.container-flex').style.transform = "translateX(300px)"
+   }
+
 
      const fakePosts = [
     {
@@ -71,12 +80,19 @@ export const FeedPreview = () => {
   return (
     <>
     <div className='container-stories'>
+      <div className='container-flex'>
      {links.map((link)=>(
 <StoriesPreview key={link} indice={link}/>
      ))}
- <button
- >➡</button>      
+   
     </div>
+     <button className='btnNext'
+ onClick={moveStories}>➡</button>  
+ <button className='btnBack'
+ onClick={constBackStories}
+ >⬅</button> 
+    </div>
+
     <div className='postcardInstancia'>
     {fakePosts.map((post)=>(
      <PostCards key={post.id} post={post} />   
