@@ -376,10 +376,9 @@ margin-bottom: 30px;
     height: 40%;
     right: 250px;
     bottom: 0;
-    
-    overflow: scroll;
-    border-top-right-radius: 10%;
-    border-top-left-radius: 10% ;
+    overflow-y: scroll;
+   
+   
 }
 
 .chatUp{
@@ -390,13 +389,26 @@ margin-bottom: 30px;
 }
 .chatdown{
     
-    margin-top: 95%;
     
+    position: fixed;
+    width: fit-content;
+    bottom: 0;
+    
+}
+.chatdown input{
+    padding-right: 10px;
 }
 
 .chefsito{
     width: 100%;
    
     background-color: aqua;
+}
+
+
+.userIA{
+    width: 100%;
+    
+    background-color: red;
 }
 

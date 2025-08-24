@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
 import { apiTestVideos, DeepseekNest, redtubeAPI } from '../connectionApi/Api';
+import { SortMessages } from './SortMessages';
 
 export const FeedPreview = () => {
   
@@ -11,6 +12,7 @@ export const FeedPreview = () => {
   const [chatOpen, setchatOpen] = useState(false)
   const [message, setmessage] = useState("")
   const [resIA, setresIA] = useState("")
+  const [msjArray, setmsjArray] = useState([])
 
    useEffect(  () => {
    /* const idk = async ()=>{
@@ -72,6 +74,7 @@ export const FeedPreview = () => {
     const response = await DeepseekNest(message);
     const msj = response.message.split("</think>");
     setresIA(msj[1].trim());
+    setmsjArray(prev=>([...prev,{user:"Person",text:message},{user:"IA",text:msj[1].trim()}]));
    }
      const fakePosts = [
     {
@@ -96,7 +99,7 @@ export const FeedPreview = () => {
     }
   ];
 
-  console.log(links);
+ 
   
   return (
     <>
@@ -135,7 +138,11 @@ export const FeedPreview = () => {
         <div className='chatUp'>
       <div>chefsitogpt</div>
       <div className='x' onClick={functionChatOpen}>x</div></div>
-      <div className='chefsito'>{resIA}</div>
+      {msjArray.map(
+        (msj,i) => (
+        
+        <SortMessages i={i} emisor={msj}></SortMessages>)
+      )}
       <div className='chatdown'>
         <input type="text"
         onChange={(e)=>setmessage(e.target.value)}

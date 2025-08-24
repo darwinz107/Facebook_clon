@@ -6,9 +6,8 @@ import { WindowLogin } from './WindowLogin';
 
 
 export const PostCards = ({post}) => {
-const postDiv = `postDiv${post.id}`;
 
-  const peopleComment = [
+const peopleC = [
   {
    id:1,
    name:'Ana Lopez',
@@ -21,6 +20,28 @@ id:2,
     avatar: "https://img.icons8.com/?size=100&id=7819&format=png&color=000000",
    comment: 'I love your post'
   }];
+
+const postDiv = `postDiv${post.id}`;
+const [comment, setcomment] = useState("")
+const [peopleComment, setpeopleComment] = useState(peopleC)
+
+  
+
+  const addComment = () =>{
+  setpeopleComment(prev => [...prev,{id:peopleComment.length +1,
+    name: "Anonymous",
+     avatar:"https://img.icons8.com/?size=100&id=7819&format=png&color=000000",
+     comment: comment
+  }])
+
+  
+  }
+
+ useEffect(() => {
+   
+ }, [peopleComment])
+ 
+  
 /*
    useEffect(  () => {
      
@@ -73,7 +94,7 @@ id:2,
    <div className='countLikes'>
     <div>{post.likes} likes</div>
     <div className='side-comment'><button onClick={
-        showComments}>{post.comments} comments</button>
+        showComments}>{peopleComment.length} comments</button>
         {comments &&(
          <div className='side-comment-child'>
       {peopleComment.map((person) =>(
@@ -91,8 +112,10 @@ id:2,
     </div>
      {inputComment &&(
       <div>
-        <input type="text"/>
-        <button onClick={sshowWindowToLogin}>send</button>
+        <input type="text"
+        onChange={(e)=> setcomment(e.target.value)}
+        />
+        <button onClick={addComment}>send</button>
       </div>
      )}
    </div>
