@@ -412,3 +412,42 @@ margin-bottom: 30px;
     background-color: red;
 }
 
+.container-new-post{
+    width: 57%;
+    margin: auto;
+    border: 1px solid black;
+    text-align: center;
+    
+    margin-bottom: 10px;
+    padding: 18px;
+    background-color: #e6e6e6;
+}
+
+.inpText {
+    padding: 10px;
+    width: 70%;
+    margin-right: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.container-new-post button{
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container-new-post button:hover{
+    background-color: #ccc;
+}
+
+.file{
+    cursor: pointer;
+    
+   
+}
+video{
+    width: min-content;
+    height: auto;
+    
+}

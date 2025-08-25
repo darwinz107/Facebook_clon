@@ -3,6 +3,7 @@ import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
 import { apiTestVideos, DeepseekNest, redtubeAPI } from '../connectionApi/Api';
 import { SortMessages } from './SortMessages';
+import { NewPost } from './NewPost';
 
 export const FeedPreview = () => {
   
@@ -13,6 +14,7 @@ export const FeedPreview = () => {
   const [message, setmessage] = useState("")
   const [resIA, setresIA] = useState("")
   const [msjArray, setmsjArray] = useState([])
+ 
 
    useEffect(  () => {
    /* const idk = async ()=>{
@@ -76,13 +78,13 @@ export const FeedPreview = () => {
     setresIA(msj[1].trim());
     setmsjArray(prev=>([...prev,{user:"Person",text:message},{user:"IA",text:msj[1].trim()}]));
    }
-     const fakePosts = [
+     const posts = [
     {
       id: 1,
       author: "Juan Pérez",
       avatar: "https://img.icons8.com/?size=100&id=7819&format=png&color=000000",
       content: "Hoy aprendí a hacer un feed con React 🚀",
-      image: "https://via.placeholder.com/500x300",
+      image: {type:"image/",name:"https://via.placeholder.com/500x300"},
       likes: 12,
       comments: 3,
       time: "Hace 2 horas"
@@ -92,14 +94,14 @@ export const FeedPreview = () => {
       author: "María López",
       avatar: "https://img.icons8.com/?size=100&id=7819&format=png&color=000000",
       content: "Mi nuevo dibujo 🎨",
-      image: "https://via.placeholder.com/500x300",
+      image: {type:"image/",name:"https://via.placeholder.com/500x300"},
       likes: 30,
       comments: 5,
       time: "Hace 4 horas"
     }
   ];
 
- 
+  const [fakePosts, setfakePosts] = useState([])
   
   return (
     <>
@@ -121,6 +123,7 @@ export const FeedPreview = () => {
  >⬅</button> 
     </div>
 
+    <NewPost setPosts={setfakePosts}></NewPost>
     <div className='postcardInstancia'>
     {fakePosts.map((post)=>(
      <PostCards key={post.id} post={post} />   
