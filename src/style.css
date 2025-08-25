@@ -17,7 +17,7 @@ img{
     width: 250px;
     height: 300px;
    margin-left: 530px ;
-  
+   cursor: pointer;
    
 }
 li:hover{
@@ -180,7 +180,8 @@ background-color: aqua;
 .post-div img{
    margin: auto;
    padding: 10px;
-   
+   width: 50%;
+   height: 70%;
 }
 
 .countLikes{
@@ -449,5 +450,78 @@ margin-bottom: 30px;
 video{
     width: min-content;
     height: auto;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 12px;
+    margin-bottom: 12px;
     
+}
+
+.container-view-post{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: #ccc;
+    width: 80%;
+    height: 90%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    
+}
+
+.child-img{
+
+ width: 60%;
+ height:100%;
+overflow: hidden;
+}
+
+.child-img img{
+    
+    margin: auto;
+    margin-left: 23px;
+    width: 87%;
+    height: 100%;
+    
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+
+.child-comment-like{
+    border: 1px solid black;
+    width: 40%;
+     height:96%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+}
+.child-comment-like div{
+    position: fixed;
+    bottom: 0;
+    
+}
+
+.child-comment-like div input{
+  
+   padding-left: 200px;
+    
+}
+.child-comment-like div button{
+    
+}
+.exit{
+    position: fixed;
+    right: 0;
+}
+
+.container-view-post button{
+
+width: 58px;
+}
+
+.like{
+position: fixed;
+bottom: 25px;
 }

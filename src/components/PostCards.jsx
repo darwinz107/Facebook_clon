@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { geminiNest } from '../connectionApi/Api';
 import { SideComments } from './sideComments';
 import { WindowLogin } from './WindowLogin';
+import { ControlVideo } from './ControlVideo';
+import { WindowPost } from './windowPost';
 
 
 export const PostCards = ({post}) => {
@@ -25,7 +27,10 @@ const postDiv = `postDiv${post.id}`;
 const [comment, setcomment] = useState("")
 const [peopleComment, setpeopleComment] = useState(peopleC)
 const [post1, setpost] = useState(post.likes)
-  
+const [showPostFull, setshowPostFull] = useState(false)
+
+const showfullPost = ()=> setshowPostFull(!showPostFull);
+
 
   const addComment = () =>{
   setpeopleComment(prev => [...prev,{id:peopleComment.length +1,
@@ -73,22 +78,9 @@ const [post1, setpost] = useState(post.likes)
 
   const [showWindowToLogin, setshowWindowToLogin] = useState(false)
   const sshowWindowToLogin = () => setshowWindowToLogin(true);
-  const [timer, settimer] = useState(null)
+  
 
- const handleMouseOver = (e) =>{
-   e.preventDefault();
-   const id = setTimeout(() => {
-      e.target.play();
-   }, 3000);
-   settimer(id);
- }
- 
- const handleMouseOut = (e) =>{
- 
-   clearTimeout(timer);
-   e.target.pause();
-   e.target.currentTime = 0;
- }
+
 
   return (
     <>
@@ -107,7 +99,7 @@ const [post1, setpost] = useState(post.likes)
    
     <div>{post.content}</div>
     
-     {post && (post.image.type.startsWith("image/")?(<img src={URL.createObjectURL(post.image)}></img>):(<video controls={true} src={URL.createObjectURL(post.image)} onMouseOver={(e)=>handleMouseOver(e)} onMouseOut={(e)=>handleMouseOut(e)}></video>))}
+     <ControlVideo file={post.image} showfullPost={showfullPost}></ControlVideo>
 </div>
    <div className='countLikes'>
     
@@ -145,6 +137,12 @@ const [post1, setpost] = useState(post.likes)
        {showWindowToLogin &&(
 <WindowLogin showLogin={showWindowToLogin}  close={setshowWindowToLogin}></WindowLogin>
     )}
+
+    {showPostFull &&(
+      <WindowPost post={post} peopleComment={peopleComment} setpeopleComment={setpeopleComment} showfullPost={showfullPost}></WindowPost>
+    )
+
+    }
     </>
   )
 }
