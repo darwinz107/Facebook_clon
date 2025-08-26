@@ -7,7 +7,8 @@ export const NewPost = ({setPosts}) => {
     const [file, setfile] = useState("")
 
     const generateObjet = () =>{
-        setPosts(prev => [...prev, {
+    
+       setPosts(prev => [...prev, {
       id: Date.now().toString(),
       author: "Anonymous",
       avatar: "https://img.icons8.com/?size=100&id=7819&format=png&color=000000",
@@ -18,7 +19,9 @@ export const NewPost = ({setPosts}) => {
       time: "Hace 2 horas"
       
     }]);
-    console.log(file)
+    
+    
+       
     }
 
   

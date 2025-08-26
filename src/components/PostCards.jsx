@@ -7,7 +7,10 @@ import { ControlVideo } from './ControlVideo';
 import { WindowPost } from './windowPost';
 
 
-export const PostCards = ({post}) => {
+export const PostCards = ({post,deletepost}) => {
+
+
+
 
 const peopleC = [
 /*  {
@@ -23,6 +26,9 @@ id:2,
    comment: 'I love your post'
   }*/];
 
+
+  
+
 const postDiv = `postDiv${post.id}`;
 const [comment, setcomment] = useState("")
 const [peopleComment, setpeopleComment] = useState(peopleC)
@@ -31,6 +37,9 @@ const [showPostFull, setshowPostFull] = useState(false)
 
 const showfullPost = ()=> setshowPostFull(!showPostFull);
 
+const [showOptions, setshowOptions] = useState(false)
+
+const changeStateOption = () => setshowOptions(!showOptions);
 
   const addComment = () =>{
   setpeopleComment(prev => [...prev,{id:peopleComment.length +1,
@@ -46,6 +55,9 @@ const showfullPost = ()=> setshowPostFull(!showPostFull);
     setpost(post1+1);
   }
  
+  const deleteComment = (id) =>{
+    setpeopleComment(prev => prev.filter((post)=> post.id !==id));
+  }
   
 /*
    useEffect(  () => {
@@ -79,20 +91,27 @@ const showfullPost = ()=> setshowPostFull(!showPostFull);
   const [showWindowToLogin, setshowWindowToLogin] = useState(false)
   const sshowWindowToLogin = () => setshowWindowToLogin(true);
   
-
-
+  
 
   return (
     <>
     <div
     className='postcard-div'
     >
+
     <div className='profile-div'>
         <img src={post.avatar} alt={post.author} />
 
         <div>
             <strong>{post.author}</strong>
             <div>{post.time}</div>
+        </div>
+        
+        <div className='options'><button onClick={changeStateOption}>...</button>
+        {showOptions&& <div className='child-options'>
+          <button>update</button>
+          <button onClick={()=> deletepost(post.id)}>delete</button>
+        </div>}
         </div>
     </div>
     <div className='post-div' id={postDiv}>
@@ -139,7 +158,7 @@ const showfullPost = ()=> setshowPostFull(!showPostFull);
     )}
 
     {showPostFull &&(
-      <WindowPost post={post} peopleComment={peopleComment} setpeopleComment={setpeopleComment} showfullPost={showfullPost} moreLikes={moreLikes} likes={post1}></WindowPost>
+      <WindowPost post={post} peopleComment={peopleComment} setpeopleComment={setpeopleComment} showfullPost={showfullPost} moreLikes={moreLikes} likes={post1} deleteComment={deleteComment}></WindowPost>
     )
 
     }

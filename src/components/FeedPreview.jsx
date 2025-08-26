@@ -103,6 +103,15 @@ export const FeedPreview = () => {
 
   const [fakePosts, setfakePosts] = useState([])
   
+  const deletePost = (id) =>{
+    
+     setfakePosts(prev=> prev.filter((prev)=> prev.id !== id));
+  }
+ 
+ 
+
+  
+
   return (
     <>
     <div className='container-stories'>
@@ -123,10 +132,11 @@ export const FeedPreview = () => {
  >⬅</button> 
     </div>
 
-    <NewPost setPosts={setfakePosts}></NewPost>
-    <div className='postcardInstancia'>
-    {fakePosts.map((post)=>(
-     <PostCards key={post.id} post={post} />   
+    <NewPost setPosts={setfakePosts} ></NewPost>
+
+     <div className='postcardInstancia'>
+    { fakePosts.map((post)=>(
+     <PostCards key={post.id} post={post} deletepost={deletePost} />   
     )      
     )}</div>
     {!showChat&&(<div className='barChat' onClick={functionShowChat}>chats</div>)}

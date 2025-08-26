@@ -163,7 +163,7 @@ background-color: aqua;
 
 .profile-div{
     display: flex;
-  
+    width: 100%;
 }
 
 .profile-div img{
@@ -527,7 +527,7 @@ overflow: hidden;
     right: 0;
 }
 
-.container-view-post button{
+.exit{
 
 width: 58px;
 }
@@ -556,4 +556,34 @@ bottom: 25px;
 .container-full-comment{
     border-bottom: 1px solid black;
     margin-bottom: 10px;
+}
+
+.profile-div button{
+
+}
+.options{
+    margin-left: 84%;
+    position: relative;
+}
+
+.child-bar-option{
+    margin-left: 71%;
+    position: relative;
+}
+
+.child-options{
+    position: absolute;
+    
+}
+
+.child-options button{
+    border: none;
+    padding: 10px;    
+}
+.child-options button:hover{
+background-color: #75a6c2;
+}
+
+.btnOption{
+    
 }
