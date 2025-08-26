@@ -139,7 +139,7 @@ const showfullPost = ()=> setshowPostFull(!showPostFull);
     )}
 
     {showPostFull &&(
-      <WindowPost post={post} peopleComment={peopleComment} setpeopleComment={setpeopleComment} showfullPost={showfullPost}></WindowPost>
+      <WindowPost post={post} peopleComment={peopleComment} setpeopleComment={setpeopleComment} showfullPost={showfullPost} moreLikes={moreLikes} likes={post1}></WindowPost>
     )
 
     }

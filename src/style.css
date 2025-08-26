@@ -11,6 +11,9 @@ padding: 10px;
 text-align: center;    
 }
 
+button{
+    cursor: pointer;
+}
 
 img{
 
@@ -227,9 +230,17 @@ font-size: large;
 
 .profile-sideComments img{
    width: 10px;
-   height: auto;
+   height: 20px;
    margin-left: 0;
    
+   
+}
+
+.avatar{
+   width: 30px;
+   height: 18px;
+   margin-left: 0;  
+  
 }
 
 .profile-sideComments{
@@ -497,7 +508,7 @@ overflow: hidden;
     display: flex;
     flex-direction: column;
 }
-.child-comment-like div{
+.barinput{
     position: fixed;
     bottom: 0;
     
@@ -505,7 +516,7 @@ overflow: hidden;
 
 .child-comment-like div input{
   
-   padding-left: 200px;
+  width: 370px;
     
 }
 .child-comment-like div button{
@@ -523,5 +534,26 @@ width: 58px;
 
 .like{
 position: fixed;
+display: flex;
+flex-direction: column;
 bottom: 25px;
+}
+
+
+
+.child-coment{
+    background-color: aliceblue;
+
+    width: 100%;
+    height: 91%;
+}
+
+.child-comments-full-w{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.container-full-comment{
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
 }
