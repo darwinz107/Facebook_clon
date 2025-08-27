@@ -91,11 +91,31 @@ const changeStateOption = () => setshowOptions(!showOptions);
   const [showWindowToLogin, setshowWindowToLogin] = useState(false)
   const sshowWindowToLogin = () => setshowWindowToLogin(true);
   
+  const [continuePost, setcontinuePost] = useState(false);
+  const [showWarning, setshowWarning] = useState(false);
+
+
+  useEffect(() => {
+   const validate = () =>{
+    if(post.image){
+      setcontinuePost(true);
+      setshowWarning(false);
+    }
+    else{
+      setcontinuePost(false);
+      setshowWarning(true);
+    }
+   }
+   validate();
+  }, [post.image])
   
+   const pressOk = () =>{
+    setshowWarning(false)
+   }
 
   return (
     <>
-    <div
+   {continuePost && ( <div
     className='postcard-div'
     >
 
@@ -114,12 +134,13 @@ const changeStateOption = () => setshowOptions(!showOptions);
         </div>}
         </div>
     </div>
-    <div className='post-div' id={postDiv}>
+  <div className='post-div' id={postDiv}>
    
     <div>{post.content}</div>
     
      <ControlVideo file={post.image} showfullPost={showfullPost}></ControlVideo>
 </div>
+
    <div className='countLikes'>
     
     <div>{post1} likes</div>
@@ -152,7 +173,17 @@ const changeStateOption = () => setshowOptions(!showOptions);
 
 
     
-    </div>
+    </div>)}
+
+    {showWarning &&(
+  <div className='container-msjWarning'>
+            <div>
+                <h2>Must add an image or video</h2>
+                <button onClick={pressOk}>Ok</button>
+            </div>
+        </div>
+)
+  } 
        {showWindowToLogin &&(
 <WindowLogin showLogin={showWindowToLogin}  close={setshowWindowToLogin}></WindowLogin>
     )}

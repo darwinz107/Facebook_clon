@@ -10,19 +10,21 @@ import { NoAuthorized } from './paths/NoAuthorized.jsx'
 import { Update } from './profile/Update.jsx'
 import { NavBarNotLogin } from './components/NavBarNotLogin.jsx'
 import { AppPreview } from './AppPreview.jsx'
+import { CreatePDF } from './admin/CreatePDF.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
   <BrowserRouter>
     <Routes>
-      <Route path = "/" element={<App/>}></Route>
-      <Route path='/login' element={<App/>}></Route>
+      <Route path = "/" element={<AppPreview></AppPreview>}></Route>
       <Route path='/notlogin' element={<AppPreview/>}></Route>
+      <Route path='/login' element={<App/>}></Route>
       <Route path = "/register" element={<Register/>} ></Route>
       <Route path='/principal' element={<Principal/>}></Route>
       <Route path='/autorizado' element={<Authorized/>}></Route>
       <Route path='/noautorizado' element={<NoAuthorized/>}></Route>
       <Route path='/updateProfile' element={<Update></Update>}></Route>
+      <Route path='/generatePdf' element={<CreatePDF></CreatePDF>}></Route>
     </Routes>
   </BrowserRouter>
   </StrictMode>

@@ -195,3 +195,12 @@ export const apiTestVideos = async() =>{
 
     return data;
 }
+
+export const users = async() =>{
+    const response = await fetch("http://localhost:3000/user/infoUsers",{
+        method:'GET',
+        credentials:'include'
+    });
+    const data = await response.json();
+    return data;
+}
