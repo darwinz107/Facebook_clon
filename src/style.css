@@ -602,11 +602,12 @@ background-color: #75a6c2;
 .container-pdf{
  position: absolute;
   
+  
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: fit-content;
-  height: fit-content;
+  width: 80%;
+  height: 50%;
 }
 
 .container-pdf button{
@@ -633,8 +634,24 @@ background-color: #75a6c2;
 
 
 .child-pdf-row div{
-    margin-left: 20px;
+    
     border-right: 1px solid black;
     padding: 10px;
-    width: 34%;
+    width: 33%;
+    font-family: Arial, sans-serif;
+  color: black;
+}
+
+#pdfContent {
+  width: 400px;
+  height: 100px;
+  padding: 20px;
+  background-color: white; /* obligatorio para que no salga transparente */
+  color: black;            /* texto visible */
+  border: 1px solid black; /* opcional */
+}
+
+.container-pdf-principal{
+    background-color: #75a6c2;
+    width: 80%;
 }
