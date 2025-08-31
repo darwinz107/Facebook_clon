@@ -19,7 +19,7 @@ img{
 
     width: 250px;
     height: 300px;
-   margin-left: 530px ;
+   
    cursor: pointer;
    
 }
@@ -278,20 +278,46 @@ font-size: large;
 }
 
 .container-flex{
-  
+   
 display: flex;
-width: 1050px;
+width: 1020px;
 height: 100%;
 transition: transform 0.3s ease ;
 
 }
 
+
+
 .statu-child{
-   width: 40%;
-    border: 2px solid red;
-    border-radius: 1%;
+  
+    width: calc(100%/4);
+    box-sizing: border-box;
+    background-color: black;
     
 }
+
+.statu-child-img{
+    width: calc(100%/4);
+   
+     box-sizing: border-box;
+    
+    text-align: center;
+    background-color: rgba(206, 206, 206, 0.5);
+}
+.statu-child-img img{
+    width: 70px;
+    height: auto;
+   margin-top: 90px;
+   transition: 0.3s ease-in-out;
+}
+
+.statu-child-img img:hover{
+    width: 80px;
+    height: auto;
+   margin-top: 85px;
+   
+}
+
 
 .btnNext{
   
@@ -321,8 +347,9 @@ padding-top: 15%;
    width: 100%;
    height: 100%;
    border-radius: 1%;
-   background-color: black;
+   
    cursor: pointer;
+   
 }
 
 .statu-child img{
@@ -331,8 +358,8 @@ padding-top: 15%;
    height: 100%;
    border-radius: 1%;
    background-color: black;
-   margin-left: 0;
-}
+   
+} 
 
 .barChat{
     position: fixed;
@@ -519,9 +546,7 @@ overflow: hidden;
   width: 370px;
     
 }
-.child-comment-like div button{
-    
-}
+
 .exit{
     position: fixed;
     right: 0;
@@ -584,9 +609,6 @@ bottom: 25px;
 background-color: #75a6c2;
 }
 
-.btnOption{
-    
-}
 
 .container-msjWarning{
     position: fixed;
@@ -731,14 +753,35 @@ height: 80%;
 
 .storie-arrow{
     
-    background-color: white;
+    
+    background-color:rgba(170, 170, 170, 0.5);
    color: rgb(0, 0, 0);
    align-content: center;
    cursor: pointer;
-  width: 10%;
+  width: 5%;
+text-align: center;
 }
 
+#arrow-left{
+position: fixed;
+
+top: 50%;
+height: 10%;
+border-radius: 100%;
+}
+
+#arrow-right{
+    position: fixed;
+    left: 95%;
+    top: 50%;
+    height: 10%;
+    border-radius: 100%;
+
+}
 .storie-arrow:hover{
     background-color: #ccc;
 }
 
+.uploadStorie{
+    display: none;
+}

@@ -36,7 +36,7 @@ export const FeedPreview = () => {
 
      const idk2 = async() =>{
       const videos = await apiTestVideos();
-     
+      
       
      const randoms = new Set();
      const array = [];
@@ -61,25 +61,33 @@ export const FeedPreview = () => {
    
    
    const moveStories = () =>{
+   // alert(refContainerStories.current.clientWidth)
      //document.querySelector('.container-flex').style.transform = "translateX(-500px)"
-     setlimitMove((prev)=>Math.max(prev - 300,-(links.length - 2)*300));
+     setlimitMove((prev)=>Math.max(prev - refContainerStories.current.clientWidth,-(links.length - 3)*refContainerStories.current.clientWidth));
     
    }
 
   const constBackStories = () =>{
     //document.querySelector('.container-flex').style.transform = "translateX(300px)"
-    setlimitMove((prev)=>Math.min(prev+300,0));
+    setlimitMove((prev)=>Math.min(prev+800,0));
    }
 
    const moveStatus = () =>{
+    for (let index = 0; index < length.length; index++) {
+      reff.current[index].pause();
+      reff.current[index].currentTime = 0;
+    }
     setlimitMove2((prev)=>Math.max(prev - reff.current.clientWidth,-(links.length -1)*reff.current.clientWidth));
     
-    alert(reff.current.clientWidth);
    }
 
    const backStatus = () =>{
+   for (let index = 0; index < links.length; index++) {
+    reff.current[index].pause();
+    reff.current[index].currentTime = 0;
+   }
     setlimitMove2((prev)=>Math.min(prev + reff.current.clientWidth,0));
-    console.log(limitMove2);
+    
    }
 
 
@@ -126,36 +134,31 @@ export const FeedPreview = () => {
     
      setfakePosts(prev=> prev.filter((prev)=> prev.id !== id));
   }
- const reff = useRef(null);
-useLayoutEffect(() => {
-  if (!reff.current) return;
-  const observer = new ResizeObserver(entries =>{
-    for(let entry of entries){
-      setwidthVideo(entry.current.width);
-    }
-  });
+ const reff = useRef([]);
+ const refContainerStories = useRef(null);
+const refUploadStorie = useRef(null);
 
-  observer.observe(reff.current);
 
-  return () => observer.disconnect();
-}, [])
 
+const uploadStorie = () =>{
+ refUploadStorie.current.click();
  
-  console.log(widthVideo);
- 
+}
 
   return (
     <>
-    <div className='container-stories'>
-      <div className='container-flex'
+    <div ref={refContainerStories} className='container-stories'>
+      <input ref={refUploadStorie} type="file" accept='image/*,video/*' className='uploadStorie' />
+      <div  className='container-flex'
       style={{
        transform: `translateX(${limitMove}px)`
       }}
       >
+        <div className="statu-child-img"><img src="public\circle-arrow-up-solid-full.svg" alt="" srcset="" /></div> 
      {links.map((link)=>(
 <StoriesPreview key={link} indice={link} setshowwindowstorie={setshowwindowStories}/>
      ))}
-   
+  
     </div>
      <button className='btnNext'
  onClick={moveStories}>➡</button>  
@@ -165,9 +168,17 @@ useLayoutEffect(() => {
     </div>
 
       <div className={`container-window-storie ${showwindowStories ? "active":""}`}>
-      <button className='x' onClick={()=>setshowwindowStories(false)}>X</button>
-       <div className='storie-arrow' onClick={moveStatus}>➡</div>
-        <div className='storie-arrow' onClick={backStatus}>⬅</div>
+      <button className='x' onClick={()=>{setshowwindowStories(false)
+      console.log(reff)
+     
+      for (let index = 0; index < links.length; index++) {
+       reff.current[index].pause();
+       reff.current[index].currentTime =0;
+        
+      }
+      }}>X</button>
+       <div className='storie-arrow' id='arrow-right' onClick={moveStatus}>➡</div>
+        <div className='storie-arrow' id='arrow-left' onClick={backStatus}>⬅</div>
       
       <div className='container-child-storie'>
        
@@ -177,8 +188,11 @@ useLayoutEffect(() => {
             transform:`translateX(${limitMove2}px)`
           }
          }>
-          {links.map((link,index)=>(
-            <SetVideos key={index} indice={link}></SetVideos>
+          {links.map((link,index)=>
+            
+            (
+            
+            <SetVideos key={index} indice={link} sethandlevd={(ref)=>reff.current[index]=ref }></SetVideos>
           ))}
          </div>
         

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { apiTestVideos } from '../connectionApi/Api'
+import { useRef } from 'react'
 
-export const SetVideos = ({indice}) => {
-
+export const SetVideos = ({indice,sethandlevd}) => {
+ 
+  
+  
     const [video1, setvideo] = useState("")
-   
+    
     useEffect(() => {
       const getLinks = async() =>{
         const data = await apiTestVideos();
@@ -19,7 +22,9 @@ export const SetVideos = ({indice}) => {
    
   return (
     <>  <div className='video-stories'></div>
-        <video id='vd' src={video1.videoUrl} controls={true}></video>   
+        <video ref={sethandlevd} id='vd' src={video1.videoUrl} controls={true}
+        
+        ></video>   
     </>
   )
 }
