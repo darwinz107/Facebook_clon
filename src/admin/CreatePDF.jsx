@@ -15,17 +15,8 @@ import { MyDocument } from '../components/MyDocument';
 export const CreatePDF = () => {
 
     const [user, setuser] = useState([]);
+    const [url, seturl] = useState("")
 
- const gPdf = async () =>{
-    const blob = await pdf(<MyDocument users={user}/>).toBlob();
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement("a");
-    a.href= url;
-   // a.download="reporte.pdf";
-   a.target = url;
-    a.click();
- }
 
 
   //   const reff = useRef();
@@ -39,10 +30,26 @@ export const CreatePDF = () => {
                 
              
             };
+             getUsers();
             
-            getUsers();
-       
+   
         }, []);
+
+        useEffect(() => {
+          const gPdf = async () =>{
+    const blob = await pdf(<MyDocument users={user}/>).toBlob();
+    const url = URL.createObjectURL(blob);
+    seturl(url);
+   /* const a = document.createElement("a");
+    a.href= url;
+    a.download="reporte.pdf";
+   a.target = url;
+    a.click();*/
+ }
+           
+            gPdf();
+        }, [user])
+        
 
     const generatePdf = async () => {
         //   await new Promise(resolver => setTimeout(resolver,3000));
@@ -117,7 +124,9 @@ export const CreatePDF = () => {
                       {user.map((u,index)=><TableUsers key={index} users={u}></TableUsers>) }   
                        
                      
-             </div> <button onClick={gPdf} >Generate PDF</button>  </div>
+             </div> 
+             <a href={url} target={url} rel="noopener noreferrer">Generate PDF</a>
+              </div>
             
         </>
     )

@@ -27,7 +27,7 @@ export const MyDocument = ({users}) => {
                        <Text>1</Text>
                    </View>
                       <Table style={styles.table}>
-                           <TH>
+                           <TH style={styles.th}>
                                <TD>name</TD>
                                <TD>cellphone</TD>
                                <TD>gender</TD>

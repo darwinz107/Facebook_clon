@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
 import { apiTestVideos, DeepseekNest, redtubeAPI } from '../connectionApi/Api';
 import { SortMessages } from './SortMessages';
 import { NewPost } from './NewPost';
+import { SetVideos } from './SetVideos';
 
 export const FeedPreview = () => {
   
-  const [links, setlinks] = useState([]) 
-  const [limitMove, setlimitMove] = useState(0)
-  const [showChat, setshowChat] = useState(false)
-  const [chatOpen, setchatOpen] = useState(false)
-  const [message, setmessage] = useState("")
-  const [resIA, setresIA] = useState("")
-  const [msjArray, setmsjArray] = useState([])
- 
+  const [links, setlinks] = useState([]) ;
+  const [limitMove, setlimitMove] = useState(0);
+  const [showChat, setshowChat] = useState(false);
+  const [chatOpen, setchatOpen] = useState(false);
+  const [message, setmessage] = useState("");
+  const [resIA, setresIA] = useState("");
+  const [msjArray, setmsjArray] = useState([]);
+  const [showwindowStories, setshowwindowStories] = useState(false);
+  const [widthVideo, setwidthVideo] = useState("");
+  const [limitMove2, setlimitMove2] = useState(0);
 
    useEffect(  () => {
    /* const idk = async ()=>{
@@ -50,7 +53,12 @@ export const FeedPreview = () => {
      }
 
      idk2();
-   }, [])
+
+
+   }, []);
+
+
+   
    
    const moveStories = () =>{
      //document.querySelector('.container-flex').style.transform = "translateX(-500px)"
@@ -61,6 +69,17 @@ export const FeedPreview = () => {
   const constBackStories = () =>{
     //document.querySelector('.container-flex').style.transform = "translateX(300px)"
     setlimitMove((prev)=>Math.min(prev+300,0));
+   }
+
+   const moveStatus = () =>{
+    setlimitMove2((prev)=>Math.max(prev - reff.current.clientWidth,-(links.length -1)*reff.current.clientWidth));
+    
+    alert(reff.current.clientWidth);
+   }
+
+   const backStatus = () =>{
+    setlimitMove2((prev)=>Math.min(prev + reff.current.clientWidth,0));
+    console.log(limitMove2);
    }
 
 
@@ -107,10 +126,23 @@ export const FeedPreview = () => {
     
      setfakePosts(prev=> prev.filter((prev)=> prev.id !== id));
   }
- 
- 
+ const reff = useRef(null);
+useLayoutEffect(() => {
+  if (!reff.current) return;
+  const observer = new ResizeObserver(entries =>{
+    for(let entry of entries){
+      setwidthVideo(entry.current.width);
+    }
+  });
 
-  
+  observer.observe(reff.current);
+
+  return () => observer.disconnect();
+}, [])
+
+ 
+  console.log(widthVideo);
+ 
 
   return (
     <>
@@ -121,7 +153,7 @@ export const FeedPreview = () => {
       }}
       >
      {links.map((link)=>(
-<StoriesPreview key={link} indice={link}/>
+<StoriesPreview key={link} indice={link} setshowwindowstorie={setshowwindowStories}/>
      ))}
    
     </div>
@@ -132,6 +164,28 @@ export const FeedPreview = () => {
  >⬅</button> 
     </div>
 
+      <div className={`container-window-storie ${showwindowStories ? "active":""}`}>
+      <button className='x' onClick={()=>setshowwindowStories(false)}>X</button>
+       <div className='storie-arrow' onClick={moveStatus}>➡</div>
+        <div className='storie-arrow' onClick={backStatus}>⬅</div>
+      
+      <div className='container-child-storie'>
+       
+      
+         <div ref={reff} className='child-window-storie' style={
+          {
+            transform:`translateX(${limitMove2}px)`
+          }
+         }>
+          {links.map((link,index)=>(
+            <SetVideos key={index} indice={link}></SetVideos>
+          ))}
+         </div>
+        
+      </div>
+        
+    </div>
+    
     <NewPost setPosts={setfakePosts} ></NewPost>
 
      <div className='postcardInstancia'>

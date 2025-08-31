@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { apiTestVideos, redtubeAPI } from '../connectionApi/Api'
 
-export const StoriesPreview = ({ indice }) => {
+export const StoriesPreview = ({ indice,setshowwindowstorie}) => {
   /*
   const [embedUrl, setEmbedUrl] = useState("");
 
@@ -66,7 +66,7 @@ export const StoriesPreview = ({ indice }) => {
        e.target.currentTime = 0;
        setshowImg(true);
       }}
-      ></video>
+      onClick={()=>setshowwindowstorie(true)} ></video>
       )}
        {showImg &&(
         <img src={video.thumbnailUrl} 

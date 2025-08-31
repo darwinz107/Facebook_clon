@@ -4,7 +4,7 @@ import { table } from 'console';
    export const styles = StyleSheet.create({
         page: {
 
-            backgroundColor: '#b699b4ff',
+            backgroundColor: '#ffffffff',
 
         },
         section: {
@@ -28,5 +28,9 @@ import { table } from 'console';
         table:{
             border:"1px solid black",
             marginTop:20
+        },
+        th:{
+               backgroundColor:"pink",
+               color:"white"
         }
     });
