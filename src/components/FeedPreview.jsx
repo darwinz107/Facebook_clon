@@ -60,11 +60,11 @@ export const FeedPreview = () => {
     console.log("exec usefect!!!");
 
    if(clickeo){
-      setpositionBtnStorie((prev)=>prev + 57.5);
+      setpositionBtnStorie((prev)=>prev + statuChild.current.clientWidth);
    }
 
    if(clickeo==false){
-     setpositionBtnStorie((prev)=>prev - 57.5);
+     setpositionBtnStorie((prev)=>prev - statuChild.current.clientWidth);
    }
 
    }, [limitMove])
@@ -73,13 +73,13 @@ export const FeedPreview = () => {
    const moveStories = () =>{
     //alert(refContainerStories.current.clientWidth)
      //document.querySelector('.container-flex').style.transform = "translateX(-500px)"
-     setlimitMove((prev)=>Math.max(prev - refContainerStories.current.clientWidth,-(refContainerStories.current.clientWidth+adjustContainerFlex)));
-    //console.log(limitMove);
+     setlimitMove((prev)=>Math.max(prev - statuChild.current.clientWidth,-(videosStories.length)*statuChild.current.clientWidth));
+    console.log(limitMove);
    }
 
   const constBackStories = () =>{
     //document.querySelector('.container-flex').style.transform = "translateX(300px)"
-    setlimitMove((prev)=>Math.min(prev+refContainerStories.current.clientWidth,0));
+    setlimitMove((prev)=>Math.min(prev+statuChild.current.clientWidth,0));
    }
 
    const moveStatus = () =>{
@@ -186,7 +186,7 @@ const [clickeo, setclickeo] = useState(null);
   setclickeo(false);
   constBackStories(); }}
   style={{
-    left:`calc(0% + ${positionBtnStorie}%)`
+    left:`calc(0% + ${positionBtnStorie}px)`
   }}
  >⬅</button> 
 

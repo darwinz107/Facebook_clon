@@ -281,7 +281,7 @@ font-size: large;
 .container-stories{
       position: relative;
     border: 2px solid black;
-    width: 810px;
+    width: 812px;
     height: 250px;
     margin: auto;
     margin-bottom: 10px;
@@ -362,7 +362,7 @@ padding: 10px;
   border-style: none;
    background-color:rgba(247, 247, 247, 0.5);
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
 .container-flex button:hover{

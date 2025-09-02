@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 export const SetVideos = ({indice,sethandlevd}) => {
  
-  console.log(`SETVIDEOS: ${indice}`)
+  //console.log(`SETVIDEOS: ${indice}`)
   return (
     <>  <div className='video-stories'></div>
         <video ref={sethandlevd} id='vd' src={indice} controls={true}

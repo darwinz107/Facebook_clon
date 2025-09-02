@@ -3,7 +3,7 @@ import { apiTestVideos, redtubeAPI } from '../connectionApi/Api'
 
 export const StoriesPreview = ({ url,setshowwindowstorie}) => {
 
-  console.log(`URL IN STORIESPREVIEW :${url}`)
+  //console.log(`URL IN STORIESPREVIEW :${url}`)
   /*
   const [embedUrl, setEmbedUrl] = useState("");
 
