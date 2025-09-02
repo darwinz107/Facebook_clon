@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')).render(
       <Route path = "/" element={<AppPreview></AppPreview>}></Route>
       <Route path='/notlogin' element={<AppPreview/>}></Route>
       <Route path='/login' element={<App/>}></Route>
-      <Route path = "/register" element={<Register/>} ></Route>
+      <Route path = '/register' element={<Register/>} ></Route>
       <Route path='/principal' element={<Principal/>}></Route>
       <Route path='/autorizado' element={<Authorized/>}></Route>
       <Route path='/noautorizado' element={<NoAuthorized/>}></Route>

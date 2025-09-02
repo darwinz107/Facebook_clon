@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { apiTestVideos, redtubeAPI } from '../connectionApi/Api'
 
-export const StoriesPreview = ({ indice,setshowwindowstorie}) => {
+export const StoriesPreview = ({ url,setshowwindowstorie}) => {
+
+  console.log(`URL IN STORIESPREVIEW :${url}`)
   /*
   const [embedUrl, setEmbedUrl] = useState("");
 
@@ -30,50 +32,32 @@ export const StoriesPreview = ({ indice,setshowwindowstorie}) => {
     </div>
   );*/
 
-
-  const [showImg, setshowImg] = useState(true)
-  const [video, setvideo] = useState("")
-
- useEffect(() => {
-   const executeFunction = async()=>{
-    const data = await apiTestVideos();
-
-    const url = data[indice];
-    setvideo(url);
-   };
-
-   executeFunction();
-   
- }, [indice])
  
 
   return (
     <>
-     <div className="statu-child" id={`statu-child${indice}`}>
+     <div className="statu-child">
       
-         {!showImg && (
+         
       <video 
       muted={true}
-      src={video.videoUrl}
+      src={url}
       //poster={video.thumbnailUrl}
       onMouseOver={(e)=>{ 
-        
+        console.log("That should plays")
         e.target.play();
         
         }
       }
-      onMouseOut={(e)=> {e.target.pause();
+      onMouseOut={(e)=> {
+        console.log("That should pauses")
+       e.target.pause();
        e.target.currentTime = 0;
-       setshowImg(true);
+       //setshowImg(true);
       }}
       onClick={()=>setshowwindowstorie(true)} ></video>
-      )}
-       {showImg &&(
-        <img src={video.thumbnailUrl} 
-        onMouseOver={(e)=> setshowImg(false)}
-        alt="" />
-        
-      )}
+      
+       
       
      
     </div>

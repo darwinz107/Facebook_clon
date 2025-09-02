@@ -5,10 +5,12 @@ import { apiTestVideos, DeepseekNest, redtubeAPI } from '../connectionApi/Api';
 import { SortMessages } from './SortMessages';
 import { NewPost } from './NewPost';
 import { SetVideos } from './SetVideos';
+import { setVideoSrorie } from '../methods/setVideoSrorie';
+import { UploadNewStorie } from './UploadNewStorie';
 
 export const FeedPreview = () => {
   
-  const [links, setlinks] = useState([]) ;
+
   const [limitMove, setlimitMove] = useState(0);
   const [showChat, setshowChat] = useState(false);
   const [chatOpen, setchatOpen] = useState(false);
@@ -18,6 +20,8 @@ export const FeedPreview = () => {
   const [showwindowStories, setshowwindowStories] = useState(false);
   const [widthVideo, setwidthVideo] = useState("");
   const [limitMove2, setlimitMove2] = useState(0);
+  const [videosStories, setvideosStories] = useState([]);
+  
 
    useEffect(  () => {
    /* const idk = async ()=>{
@@ -36,53 +40,49 @@ export const FeedPreview = () => {
 
      const idk2 = async() =>{
       const videos = await apiTestVideos();
-      
-      
-     const randoms = new Set();
-     const array = [];
-
+    const  random = []
      for (let index = 1; index < 7; index++) {
       const id = Math.floor(Math.random()* (videos.length - 1)+1);
-      randoms.add(id);   
+      console.log(`This happen in useefect #${index} :${videos[id].videoUrl}`);
+      random.push(videos[id].videoUrl);
      };
-     randoms.forEach((e)=>{
-     array.push(e);
-     })
-     setlinks(array)
-     
+     setvideosStories(random);   
      }
 
      idk2();
 
-
    }, []);
 
+   
+   useEffect(() => {
+    console.log(videosStories);
 
+   }, [videosStories])
    
    
    const moveStories = () =>{
-   // alert(refContainerStories.current.clientWidth)
+    //alert(refContainerStories.current.clientWidth)
      //document.querySelector('.container-flex').style.transform = "translateX(-500px)"
-     setlimitMove((prev)=>Math.max(prev - refContainerStories.current.clientWidth,-(links.length - 3)*refContainerStories.current.clientWidth));
-    
+     setlimitMove((prev)=>Math.max(prev - refContainerStories.current.clientWidth,-(refContainerStories.current.clientWidth+adjustContainerFlex)));
+    //console.log(limitMove);
    }
 
   const constBackStories = () =>{
     //document.querySelector('.container-flex').style.transform = "translateX(300px)"
-    setlimitMove((prev)=>Math.min(prev+800,0));
+    setlimitMove((prev)=>Math.min(prev+refContainerStories.current.clientWidth,0));
    }
 
    const moveStatus = () =>{
-    for (let index = 0; index < length.length; index++) {
+    for (let index = 0; index < videosStories.length; index++) {
       reff.current[index].pause();
       reff.current[index].currentTime = 0;
     }
-    setlimitMove2((prev)=>Math.max(prev - reff.current.clientWidth,-(links.length -1)*reff.current.clientWidth));
+    setlimitMove2((prev)=>Math.max(prev - reff.current.clientWidth,-(videosStories.length -1)*reff.current.clientWidth));
     
    }
 
    const backStatus = () =>{
-   for (let index = 0; index < links.length; index++) {
+   for (let index = 0; index < videosStories.length; index++) {
     reff.current[index].pause();
     reff.current[index].currentTime = 0;
    }
@@ -136,27 +136,36 @@ export const FeedPreview = () => {
   }
  const reff = useRef([]);
  const refContainerStories = useRef(null);
-const refUploadStorie = useRef(null);
+const [refUploadStorie, setrefUploadStorie] = useState(null);
 
+const containerFlex = useRef(null);
+const statuChild = useRef(null);
 
+const [adjustContainerFlex, setadjustContainerFlex] = useState(0);
+
+const handleContainerStoriesNew = () =>{
+   const containerStorie = statuChild.current.clientWidth;
+   setadjustContainerFlex((prev)=>prev+containerStorie)
+}
 
 const uploadStorie = () =>{
- refUploadStorie.current.click();
+refUploadStorie.current.click();
  
 }
 
   return (
     <>
     <div ref={refContainerStories} className='container-stories'>
-      <input ref={refUploadStorie} type="file" accept='image/*,video/*' className='uploadStorie' />
-      <div  className='container-flex'
+     <UploadNewStorie setvideoStorie={setvideosStories} reffnewStorie={setrefUploadStorie} adjustContainerFlex={handleContainerStoriesNew}></UploadNewStorie>
+      <div ref={containerFlex} className='container-flex'
       style={{
-       transform: `translateX(${limitMove}px)`
+       transform: `translateX(${limitMove}px)`,
+       width:`calc(172% + ${adjustContainerFlex}px)`
       }}
       >
-        <div className="statu-child-img"><img src="public\circle-arrow-up-solid-full.svg" alt="" srcset="" /></div> 
-     {links.map((link)=>(
-<StoriesPreview key={link} indice={link} setshowwindowstorie={setshowwindowStories}/>
+      <div ref={statuChild} className="statu-child-img"><img onClick={uploadStorie} src="public\circle-arrow-up-solid-full.svg" alt="" srcset="" /></div> 
+     {videosStories.map((link,index)=>(
+<StoriesPreview key={index} url={link} setshowwindowstorie={setshowwindowStories}/>
      ))}
   
     </div>
@@ -171,7 +180,7 @@ const uploadStorie = () =>{
       <button className='x' onClick={()=>{setshowwindowStories(false)
       console.log(reff)
      
-      for (let index = 0; index < links.length; index++) {
+      for (let index = 0; index < videosStories.length; index++) {
        reff.current[index].pause();
        reff.current[index].currentTime =0;
         
@@ -188,11 +197,17 @@ const uploadStorie = () =>{
             transform:`translateX(${limitMove2}px)`
           }
          }>
-          {links.map((link,index)=>
+          {videosStories.map((link,index)=>
             
             (
             
-            <SetVideos key={index} indice={link} sethandlevd={(ref)=>reff.current[index]=ref }></SetVideos>
+            <SetVideos key={index} indice={link} sethandlevd={(ref)=>{
+              if(reff.current){
+                reff.current[index]=ref
+              }
+              
+            }
+  }></SetVideos>
           ))}
          </div>
         

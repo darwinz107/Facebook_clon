@@ -26,7 +26,7 @@ export const ControlVideo = ({ file, showfullPost }) => {
 
   return (
         <>
-            {file.type.startsWith("image/") ? <img src={blobUrl} onClick={()=>showfullPost()}></img> : <video src={blobUrl} controls={true} onMouseOver={(e) => { handleMouseOver(e) }} onMouseOut={(e) => { handleMouseOut(e) }}></video>}
+            {file.type.startsWith("image/") ? <img src={blobUrl} onClick={()=>showfullPost()}></img> : <video onClick={()=>showfullPost()} src={blobUrl} controls={true} ></video>}
         </>
     )
     

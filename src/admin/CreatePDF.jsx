@@ -125,7 +125,7 @@ export const CreatePDF = () => {
                        
                      
              </div> 
-             <a href={url} target={url} rel="noopener noreferrer">Generate PDF</a>
+             <a className='btn-generate-pdf' href={url} target={url} rel="noopener noreferrer">Generate PDF</a>
               </div>
             
         </>

@@ -43,9 +43,9 @@ const authLoginNest = async (e) =>{
 
   return (
     <>
-
-   <img className='logoPrincipal' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_J0Hvb7GRs26Xv_LZYATWFCw4T7UHT7lvUw&s" alt=""/>
-
+<div className='div-logo-principal'><img className='logoPrincipal' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_J0Hvb7GRs26Xv_LZYATWFCw4T7UHT7lvUw&s" alt=""/>
+</div>
+   
    {/*<img src="public\s-l400 (1).jpg" alt=""/>*/}
 
    <form  method="post"
@@ -70,7 +70,7 @@ const authLoginNest = async (e) =>{
    <br />
    <button type="submit"
    >Login</button>
-   <p>You haven't an account? Register <Link to="/register" >here</Link></p>
+   <p>You haven't an account? Register <Link to="/register" className='a-register'>here</Link></p>
    </form>
 
     </>

@@ -94,10 +94,15 @@ cursor: pointer;
    cursor: pointer;
 }
 
-.logoPrincipal{
-    border-radius: 50%;;
+.div-logo-principal{
+   
+    text-align: center;
 }
 
+.logoPrincipal{
+    border-radius: 50%;
+    margin-top: 10px;
+}
 .container-register{
     display: flex;
     flex-direction: column;
@@ -280,7 +285,6 @@ font-size: large;
 .container-flex{
    
 display: flex;
-width: 1020px;
 height: 100%;
 transition: transform 0.3s ease ;
 
@@ -293,7 +297,7 @@ transition: transform 0.3s ease ;
     width: calc(100%/4);
     box-sizing: border-box;
     background-color: black;
-    
+    height: 100%;
 }
 
 .statu-child-img{
@@ -668,9 +672,9 @@ background-color: #75a6c2;
   width: 400px;
   height: 100px;
   padding: 20px;
-  background-color: white; /* obligatorio para que no salga transparente */
-  color: black;            /* texto visible */
-  border: 1px solid black; /* opcional */
+  background-color: white; 
+  color: black;            
+  border: 1px solid black; 
 }
 
 .container-pdf-principal{
@@ -678,8 +682,8 @@ background-color: #75a6c2;
     width: 80%;
 }
 
-a{
-   text-decoration: none;
+.btn-generate-pdf{
+ 
    color: black;
    background-color: gray;
    padding: 10px;
@@ -690,6 +694,11 @@ a{
    margin-top: 35%;
    margin-left: 50%;
    cursor: pointer;
+}
+
+a{
+  text-decoration: none;
+  
 }
 
 .container-window-storie{
@@ -748,7 +757,8 @@ position: absolute;
 
 .container-child-storie video{
 width: 100%;
-height: 80%;
+height: 580px;
+
 }
 
 .storie-arrow{
