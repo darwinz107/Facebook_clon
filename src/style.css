@@ -161,7 +161,7 @@ background-color: aqua;
 .postcard-div{
     border: 1px solid #ccc;
    
-    width: 60%;;
+    width: 818px;;
     margin: auto;
     padding-bottom: 50px;
 }
@@ -190,6 +190,13 @@ background-color: aqua;
    padding: 10px;
    width: 50%;
    height: 70%;
+}
+
+.post-div video{
+   margin: auto;
+   padding: 10px;
+   width: 90%;
+   height: 80%;
 }
 
 .countLikes{
@@ -300,6 +307,14 @@ transition: transform 0.3s ease ;
     height: 100%;
 }
 
+.statu-child:hover{
+  
+    width: calc(100%/4);
+    box-sizing: border-box;
+    background-color: black;
+    height: 100%;
+}
+
 .statu-child-img{
     width: calc(100%/4);
    
@@ -307,12 +322,14 @@ transition: transform 0.3s ease ;
     
     text-align: center;
     background-color: rgba(206, 206, 206, 0.5);
+   
 }
 .statu-child-img img{
     width: 70px;
     height: auto;
    margin-top: 90px;
    transition: 0.3s ease-in-out;
+   
 }
 
 .statu-child-img img:hover{
@@ -326,24 +343,38 @@ transition: transform 0.3s ease ;
 .btnNext{
   
   position: absolute;
-  top: 0;
-  right: 0;
-  padding-top: 15%;
-  padding-bottom: 15%;
+  top: 50%;
+  
+  padding: 10px;
   border-style: none;
-  background-color: azure;
+  background-color:rgba(247, 247, 247, 0.5);
   cursor: pointer;
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
 }
 
 .btnBack{
-    position: absolute;
-  top: 0;
-  left: 0;
-padding-top: 15%;
-  padding-bottom: 15%;
+  position: absolute;
+  top: 50%;
+  
+ border-radius: 50%;
+padding: 10px;
   border-style: none;
-  background-color: azure;
+   background-color:rgba(247, 247, 247, 0.5);
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.container-flex button:hover{
+    background-color: rgba(170, 170, 170, 0.5);
+    padding: 12px;
+    
+}
+
+.btnNext:hover{
+    background-color: rgba(170, 170, 170, 0.5);
+    padding: 12px;
+    
 }
 
 .statu-child video{
@@ -456,7 +487,7 @@ margin-bottom: 30px;
 }
 
 .container-new-post{
-    width: 57%;
+    width: 779px;
     margin: auto;
     border: 1px solid black;
     text-align: center;
@@ -534,14 +565,14 @@ overflow: hidden;
 .child-comment-like{
     border: 1px solid black;
     width: 40%;
-     height:96%;
+     height:97.3%;
     margin-top: 2%;
     display: flex;
     flex-direction: column;
 }
 .barinput{
     position: fixed;
-    bottom: 0;
+    bottom: 3px;
     
 }
 
@@ -565,7 +596,7 @@ width: 58px;
 position: fixed;
 display: flex;
 flex-direction: column;
-bottom: 25px;
+bottom: 6%;
 }
 
 
@@ -587,9 +618,7 @@ bottom: 25px;
     margin-bottom: 10px;
 }
 
-.profile-div button{
 
-}
 .options{
     margin-left: 84%;
     position: relative;

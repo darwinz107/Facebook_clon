@@ -53,11 +53,21 @@ export const FeedPreview = () => {
 
    }, []);
 
-   
-   useEffect(() => {
-    console.log(videosStories);
+    
+   const [positionBtnStorie, setpositionBtnStorie] = useState(0)
 
-   }, [videosStories])
+   useEffect(() => {
+    console.log("exec usefect!!!");
+
+   if(clickeo){
+      setpositionBtnStorie((prev)=>prev + 57.5);
+   }
+
+   if(clickeo==false){
+     setpositionBtnStorie((prev)=>prev - 57.5);
+   }
+
+   }, [limitMove])
    
    
    const moveStories = () =>{
@@ -153,6 +163,8 @@ refUploadStorie.current.click();
  
 }
 
+const [clickeo, setclickeo] = useState(null);
+
   return (
     <>
     <div ref={refContainerStories} className='container-stories'>
@@ -160,7 +172,7 @@ refUploadStorie.current.click();
       <div ref={containerFlex} className='container-flex'
       style={{
        transform: `translateX(${limitMove}px)`,
-       width:`calc(172% + ${adjustContainerFlex}px)`
+       width:`calc(175% + ${adjustContainerFlex}px)`
       }}
       >
       <div ref={statuChild} className="statu-child-img"><img onClick={uploadStorie} src="public\circle-arrow-up-solid-full.svg" alt="" srcset="" /></div> 
@@ -168,12 +180,24 @@ refUploadStorie.current.click();
 <StoriesPreview key={index} url={link} setshowwindowstorie={setshowwindowStories}/>
      ))}
   
-    </div>
-     <button className='btnNext'
- onClick={moveStories}>➡</button>  
+  
  <button className='btnBack'
- onClick={constBackStories}
+ onClick={()=>{
+  setclickeo(false);
+  constBackStories(); }}
+  style={{
+    left:`calc(0% + ${positionBtnStorie}%)`
+  }}
  >⬅</button> 
+
+    </div>
+  <button style={{
+    left:"94.8%"
+  }} className='btnNext'
+ onClick={()=>{
+  setclickeo(true);
+  moveStories();
+ }}>➡</button>   
     </div>
 
       <div className={`container-window-storie ${showwindowStories ? "active":""}`}>
