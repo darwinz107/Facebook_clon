@@ -12,7 +12,7 @@ function uploadnewStorie(){
    if(videoUrl){
 const url = URL.createObjectURL(videoUrl);
 
-    setvideoStorie((prev)=>[...prev,url])
+    setvideoStorie((prev)=>[url,...prev])
     adjustContainerFlex();
   }
     

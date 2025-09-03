@@ -211,7 +211,7 @@ const [clickeo, setclickeo] = useState(null);
       }
       }}>X</button>
        <div className='storie-arrow' id='arrow-right' onClick={moveStatus}>➡</div>
-        <div className='storie-arrow' id='arrow-left' onClick={backStatus}>⬅</div>
+       <div className='storie-arrow' id='arrow-left' onClick={backStatus}>⬅</div>
       
       <div className='container-child-storie'>
        
