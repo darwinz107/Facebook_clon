@@ -204,3 +204,17 @@ export const users = async() =>{
     const data = await response.json();
     return data;
 }
+
+export const interaction = async(id,id2,message)=>{
+    const response = await fetch(`http://localhost:3000/user/interaction/${id}/${id2}`,{
+    method:'POST',
+    headers:{
+        'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+        message
+    })
+    });
+
+    const data = await response.json();
+}

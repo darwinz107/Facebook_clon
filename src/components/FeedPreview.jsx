@@ -7,6 +7,7 @@ import { NewPost } from './NewPost';
 import { SetVideos } from './SetVideos';
 import { setVideoSrorie } from '../methods/setVideoSrorie';
 import { UploadNewStorie } from './UploadNewStorie';
+import { interactionUser } from '../methods/communication/interactionUser';
 
 export const FeedPreview = () => {
   
@@ -109,6 +110,12 @@ export const FeedPreview = () => {
     setchatOpen(!chatOpen);
    }
 
+
+   const [chatOpenBaxter, setchatOpenBaxter] = useState(false);
+    const functionChatOpenBaxter = () =>{
+    setchatOpenBaxter(!chatOpenBaxter);
+    }
+
    const sendChefsito = async () =>{
     const response = await DeepseekNest(message);
     const msj = response.message.split("</think>");
@@ -164,6 +171,12 @@ refUploadStorie.current.click();
 }
 
 const [clickeo, setclickeo] = useState(null);
+const receptor = useRef(null);
+
+const handleInteraction =  async () =>{
+const res = await interactionUser(receptor.current.__reactFiber$utr1x2upszb.key,8,message)
+alert(res);
+}
 
   return (
     <>
@@ -248,9 +261,9 @@ const [clickeo, setclickeo] = useState(null);
     )}</div>
     {!showChat&&(<div className='barChat' onClick={functionShowChat}>chats</div>)}
     {showChat&&( <div className='barChatShow'>
-      <div className='x' onClick={functionShowChat}>x</div>
+      <div className='x' onClick={()=>functionShowChat()}>x</div>
       <div className='chats'>julio69 ❌</div>
-      <div className='chats'>baxter69 ❌</div>
+      <div className='chats' onClick={functionChatOpenBaxter}>baxter69 ✅</div>
       <div className='chats' onClick={functionChatOpen}>chefsitogpt ✅</div>
     </div>)}
 
@@ -268,6 +281,24 @@ const [clickeo, setclickeo] = useState(null);
         onChange={(e)=>setmessage(e.target.value)}
         />
            <button onClick={sendChefsito}>send</button>
+      </div>
+    </div>
+}
+
+ {chatOpenBaxter &&<div ref={receptor} key={7} className='chatOpen'>
+        <div className='chatUp'>
+      <div>baxter69</div>
+      <div className='x' onClick={functionChatOpenBaxter}>x</div></div>
+      {msjArray.map(
+        (msj,i) => (
+        
+        <SortMessages i={i} emisor={msj}></SortMessages>)
+      )}
+      <div className='chatdown'>
+        <input type="text"
+        onChange={(e)=>setmessage(e.target.value)}
+        />
+           <button onClick={handleInteraction}>send</button>
       </div>
     </div>
 }
