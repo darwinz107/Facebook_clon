@@ -218,3 +218,12 @@ export const interaction = async(id,id2,message)=>{
 
     const data = await response.json();
 }
+
+export const getInteraction = async(id,id2) =>{
+    const response = await fetch(`http://localhost:3000/USER/loadInteraction/${id}/${id2}`,{
+        method:"GET"
+    })
+
+    const data = await response.json();
+    return data;
+}

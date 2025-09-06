@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
-import { apiTestVideos, DeepseekNest, redtubeAPI } from '../connectionApi/Api';
+import { apiTestVideos, DeepseekNest, getInteraction, redtubeAPI } from '../connectionApi/Api';
 import { SortMessages } from './SortMessages';
 import { NewPost } from './NewPost';
 import { SetVideos } from './SetVideos';
@@ -25,6 +25,8 @@ export const FeedPreview = () => {
   
 
    useEffect(  () => {
+
+    
    /* const idk = async ()=>{
        const datas = await redtubeAPI();
       
@@ -39,6 +41,7 @@ export const FeedPreview = () => {
     }
      idk();*/
 
+
      const idk2 = async() =>{
       const videos = await apiTestVideos();
     const  random = []
@@ -48,9 +51,13 @@ export const FeedPreview = () => {
       random.push(videos[id].videoUrl);
      };
      setvideosStories(random);   
+
      }
 
+    
+
      idk2();
+     
 
    }, []);
 
@@ -110,10 +117,17 @@ export const FeedPreview = () => {
     setchatOpen(!chatOpen);
    }
 
-
+const receptor = useRef(null);
    const [chatOpenBaxter, setchatOpenBaxter] = useState(false);
-    const functionChatOpenBaxter = () =>{
+    const functionChatOpenBaxter = async () =>{
     setchatOpenBaxter(!chatOpenBaxter);
+    console.log(receptor.current);
+    if(receptor){
+    const data = await getInteraction(6,7);
+     setmessages(data);
+     console.log(data);
+    }
+     
     }
 
    const sendChefsito = async () =>{
@@ -171,11 +185,13 @@ refUploadStorie.current.click();
 }
 
 const [clickeo, setclickeo] = useState(null);
-const receptor = useRef(null);
+
+const [messages, setmessages] = useState([])
 
 const handleInteraction =  async () =>{
-const res = await interactionUser(receptor.current.__reactFiber$utr1x2upszb.key,8,message)
-alert(res);
+const res = await interactionUser(6,receptor.current.__reactFiber$utr1x2upszb.key,message?message:"empty")
+setmessages(res);
+console.log(messages)
 }
 
   return (
@@ -289,10 +305,10 @@ alert(res);
         <div className='chatUp'>
       <div>baxter69</div>
       <div className='x' onClick={functionChatOpenBaxter}>x</div></div>
-      {msjArray.map(
+      {messages.map(
         (msj,i) => (
         
-        <SortMessages i={i} emisor={msj}></SortMessages>)
+        <SortMessages i={i} emisor={msj} id={6}></SortMessages>)
       )}
       <div className='chatdown'>
         <input type="text"
