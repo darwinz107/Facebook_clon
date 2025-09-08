@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
-import { apiTestVideos, DeepseekNest, getInteraction, redtubeAPI } from '../connectionApi/Api';
+import { apiTestVideos, DeepseekNest, getIdToken, getInteraction, redtubeAPI } from '../connectionApi/Api';
 import { SortMessages } from './SortMessages';
 import { NewPost } from './NewPost';
 import { SetVideos } from './SetVideos';
@@ -11,7 +11,6 @@ import { interactionUser } from '../methods/communication/interactionUser';
 
 export const FeedPreview = () => {
   
-
   const [limitMove, setlimitMove] = useState(0);
   const [showChat, setshowChat] = useState(false);
   const [chatOpen, setchatOpen] = useState(false);
@@ -22,11 +21,23 @@ export const FeedPreview = () => {
   const [widthVideo, setwidthVideo] = useState("");
   const [limitMove2, setlimitMove2] = useState(0);
   const [videosStories, setvideosStories] = useState([]);
-  
+  const [tokeId, settokeId] = useState()
 
    useEffect(  () => {
 
-    
+        const generateId = async()=>{
+      const res = await getIdToken();
+      console.log(res.request.id);
+      if(res.request.id){
+        settokeId(res.request.id);
+      }else{
+        settokeId(6)
+      }
+      
+
+      
+     }
+      generateId();
    /* const idk = async ()=>{
        const datas = await redtubeAPI();
       
@@ -55,12 +66,14 @@ export const FeedPreview = () => {
      }
 
     
+    
 
      idk2();
      
 
    }, []);
 
+ 
     
    const [positionBtnStorie, setpositionBtnStorie] = useState(0)
 
@@ -118,17 +131,44 @@ export const FeedPreview = () => {
    }
 
 const receptor = useRef(null);
+const receptor2 = useRef(null);
    const [chatOpenBaxter, setchatOpenBaxter] = useState(false);
     const functionChatOpenBaxter = async () =>{
     setchatOpenBaxter(!chatOpenBaxter);
-    console.log(receptor.current);
+    console.log(`This is coming from functionChatOpenBaxter: ${receptor.current}`);
     if(receptor){
-    const data = await getInteraction(6,7);
+    const data = await getInteraction(tokeId,7);
      setmessages(data);
      console.log(data);
     }
      
     }
+
+     const [chatOpenAnonymous, setchatOpenAnonymous] = useState(false);
+    const functionChatOpenAnonymous = async () =>{
+    setchatOpenAnonymous(!chatOpenAnonymous);
+    
+    /*if(receptor2){
+    const data = await getInteraction(tokeId,receptor2.current.dataset.id);
+     setmessages(data);
+     console.log(data);
+    }*/
+     
+    }
+
+    useEffect( () => {
+
+    
+
+      const exefunction=async ()=>{if(chatOpenAnonymous && receptor2){
+      console.log(tokeId);
+         const data = await getInteraction(tokeId,receptor2.current.dataset.id);
+     setmessages(data);
+     console.log(data);
+      }}
+      exefunction();
+    }, [chatOpenAnonymous])
+    
 
    const sendChefsito = async () =>{
     const response = await DeepseekNest(message);
@@ -189,8 +229,10 @@ const [clickeo, setclickeo] = useState(null);
 const [messages, setmessages] = useState([])
 
 const handleInteraction =  async () =>{
-const res = await interactionUser(6,receptor.current.__reactFiber$utr1x2upszb.key,message?message:"empty")
-setmessages(res);
+//console.log(receptor.current.__reactFiber$9sappbzwypi.key);
+ await interactionUser(tokeId,receptor2.current.dataset.id,message?message:"empty");
+const msjs= await getInteraction(tokeId,receptor2.current.dataset.id);
+setmessages(msjs);
 console.log(messages)
 }
 
@@ -281,6 +323,7 @@ console.log(messages)
       <div className='chats'>julio69 ❌</div>
       <div className='chats' onClick={functionChatOpenBaxter}>baxter69 ✅</div>
       <div className='chats' onClick={functionChatOpen}>chefsitogpt ✅</div>
+      <div className='chats' onClick={functionChatOpenAnonymous}>anonymous ✅</div>
     </div>)}
 
     {chatOpen &&<div className='chatOpen'>
@@ -301,7 +344,7 @@ console.log(messages)
     </div>
 }
 
- {chatOpenBaxter &&<div ref={receptor} key={7} className='chatOpen'>
+ {chatOpenBaxter &&<div ref={receptor} key={7} data-id={7} className='chatOpen'>
         <div className='chatUp'>
       <div>baxter69</div>
       <div className='x' onClick={functionChatOpenBaxter}>x</div></div>
@@ -309,6 +352,24 @@ console.log(messages)
         (msj,i) => (
         
         <SortMessages i={i} emisor={msj} id={6}></SortMessages>)
+      )}
+      <div className='chatdown'>
+        <input type="text"
+        onChange={(e)=>setmessage(e.target.value)}
+        />
+           <button onClick={handleInteraction}>send</button>
+      </div>
+    </div>
+}
+
+ {chatOpenAnonymous &&<div ref={receptor2} key={6} className='chatOpen' data-id={6}>
+        <div className='chatUp'>
+      <div>anonymous</div>
+      <div className='x' onClick={functionChatOpenAnonymous}>x</div></div>
+      {messages.map(
+        (msj,i) => (
+        
+        <SortMessages i={i} emisor={msj} id={tokeId}></SortMessages>)
       )}
       <div className='chatdown'>
         <input type="text"

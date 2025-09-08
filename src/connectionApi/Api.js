@@ -227,3 +227,13 @@ export const getInteraction = async(id,id2) =>{
     const data = await response.json();
     return data;
 }
+
+export const getIdToken = async()=>{
+    const response = await fetch("http://localhost:3000/user/facebook",{
+    method:"GET",
+    credentials:"include"
+    });
+
+    const data = await response.json();
+    return data;
+}

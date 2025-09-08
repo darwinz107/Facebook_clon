@@ -10,7 +10,7 @@ function App() {
 
   const navigate = useNavigate();
 
-  const authorizedToken = async (e) =>{
+  /*const authorizedToken = async (e) =>{
      e.preventDefault();
     const token = await validation(email,password);
 
@@ -21,7 +21,7 @@ function App() {
       console.log(`This is token: ${localStorage.getItem("token")}`)
     }
 
-}
+}*/
 
 const authLoginNest = async (e) =>{
   e.preventDefault();

@@ -21,13 +21,13 @@ export const WindowPost = ({post,peopleComment,setpeopleComment,showfullPost,mor
         }
         return null;
     } , [post.image])
-
+   console.log("look at here!!!")
     console.log(post)
   return (
     <>
     <div className="container-view-post">
         <button className="exit" onClick={()=>showfullPost()}>X</button>
-        <div className="child-img">{post.image.type == "image/jpg" ?<img src={bloburl} alt="" />:<video controls={true} src={bloburl} style={{width:"100%", height:"100%"}}></video>}</div> 
+        <div className="child-img">{post.image.type == "image/jpg" || "image/webp" ?<img src={bloburl} alt="" />:<video controls={true} src={bloburl} style={{width:"100%", height:"100%"}}></video>}</div> 
         <div className="child-comment-like">
             <div className="child-coment">
               {peopleComment.map((comment)=> <CommentFullWindow key={peopleComment.id} peopleComment={comment} deleteComment={deleteComment}></CommentFullWindow>)}

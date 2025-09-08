@@ -9,8 +9,8 @@ export const SortMessages = ({i,emisor,id}) => {
         <>
     <div
     key={i}
-    className={emisor.user === "Person" || emisor.emisorId ==id? "chefsito": "userIA"}
-    >{emisor.text}</div>
+    className={emisor.user === "Person" || emisor.emisorId.id ==id? "chefsito": "userIA"}
+    >{emisor.text ?emisor.text:emisor.message}</div>
         </>
   )
 }
