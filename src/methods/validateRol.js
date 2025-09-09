@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode"
 
-
+/*
 export const validateRol = () =>{
 
     const token = localStorage.getItem('token')
@@ -15,11 +15,21 @@ export const validateRol = () =>{
         alert("No autorizado");
         return false
     }
-}
+}*/
 
 export const validateRolNest = async () =>{
     const response = await fetch("http://localhost:3000/user/rol",{
         method:'GET',
+        credentials:'include'
+    });
+
+    const data = await response.json();
+    return data;
+}
+
+export const existToken = async ()=>{
+    const response = await fetch("http://localhost:3000/user/token",{
+        method:"GET",
         credentials:'include'
     });
 

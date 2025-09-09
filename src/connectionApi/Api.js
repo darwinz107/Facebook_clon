@@ -199,7 +199,7 @@ export const apiTestVideos = async() =>{
 export const users = async() =>{
     const response = await fetch("http://localhost:3000/user/infoUsers",{
         method:'GET',
-        credentials:'include'
+        //credentials:'include'
     });
     const data = await response.json();
     return data;
@@ -220,7 +220,7 @@ export const interaction = async(id,id2,message)=>{
 }
 
 export const getInteraction = async(id,id2) =>{
-    const response = await fetch(`http://localhost:3000/USER/loadInteraction/${id}/${id2}`,{
+    const response = await fetch(`http://localhost:3000/user/loadInteraction/${id}/${id2}`,{
         method:"GET"
     })
 

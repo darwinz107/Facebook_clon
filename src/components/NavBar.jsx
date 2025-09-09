@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { validateRol, validateRolNest } from '../methods/validateRol';
+import { validateRolNest } from '../methods/validateRol';
 import { logout } from '../methods/token';
 
 
