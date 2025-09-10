@@ -8,27 +8,23 @@ const [validate, setvalidate] = useState(false)
     useEffect(() => {
       const functProtRt = async () =>{
 
-  try {
+  
     const bool = await existToken();
-  
-    if(bool.log){
-       setvalidate(true);
+  console.log(bool);
+    if(bool.access){
+      return route;
+    }else{
+      navigate("/");
+      <Navigate to={"/"}></Navigate>
     }
-   
-  } catch (error) {
-  console.error(error);
   
-  }
+  console.error(error);
+  navigate("/");
+  <Navigate to={"/"}></Navigate>
+  
       }
       functProtRt();
     }, [route])
     
 
-    if(validate){
-        return route;
-    }else{
-      //  navigate("/");
-  <Navigate to={"/"}></Navigate>
-    }
-    
 }
