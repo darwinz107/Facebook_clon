@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode"
-
+const route = "http://localhost:3000/";
 /*
 export const validateRol = () =>{
 
@@ -18,7 +18,7 @@ export const validateRol = () =>{
 }*/
 
 export const validateRolNest = async () =>{
-    const response = await fetch("http://localhost:3000/user/rol",{
+    const response = await fetch(`${route}user/rol`,{
         method:'GET',
         credentials:'include'
     });
@@ -28,7 +28,7 @@ export const validateRolNest = async () =>{
 }
 
 export const existToken = async ()=>{
-    const response = await fetch("http://localhost:3000/user/token",{
+    const response = await fetch(`${route}user/token`,{
         method:"GET",
         credentials:'include'
     });

@@ -1,7 +1,8 @@
+const route = "http://localhost:3000/";
 
 export const generateTokenNest = async(id:number) =>{
    
-    const response = await fetch(`http://localhost:3000/user/token/${id}`,{
+    const response = await fetch(`${route}user/token/${id}`,{
      method: 'GET',
      credentials:'include'
     });
@@ -11,7 +12,7 @@ export const generateTokenNest = async(id:number) =>{
 }
 
 export const logout = async() =>{
-    const response = await fetch("http://localhost:3000/user/logout",{
+    const response = await fetch(`${route}user/logout`,{
         method:'GET',
         credentials:'include'
     });

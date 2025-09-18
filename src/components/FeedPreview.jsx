@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
-import { apiTestVideos, DeepseekNest, getIdToken, getInteraction, redtubeAPI, users } from '../connectionApi/Api';
+import { apiTestVideos, createdRolNest, DeepseekNest, getIdToken, getInteraction, getRoless, redtubeAPI, resgisterUserNest, users } from '../connectionApi/Api';
 import { SortMessages } from './SortMessages';
 import { NewPost } from './NewPost';
 import { SetVideos } from './SetVideos';
@@ -25,7 +25,22 @@ export const FeedPreview = () => {
   const [chatIds, setchatIds] = useState(0)
   const [accounts, setaccountss] = useState([])
   const [chatOpenBaxter, setchatOpenBaxter] = useState([]);
-   useEffect(  () => {
+  const [roles, setroles] = useState(["admin","user"])
+  const [isRol, setisRol] = useState(0);
+  const [exists, setexists] = useState(true);
+    useEffect(  () => {
+
+       const createUseDefault =async() =>{
+        const countUsers = await users();
+        if(countUsers.length ==0 && exists){
+          console.log("Entro a countUser y tiene",countUsers.length);
+          console.log(exists);
+          await resgisterUserNest("anonymous",1111111111,"facebook@gmail.com",null,null);
+         setexists(false); 
+        } 
+          
+       }
+       createUseDefault();
       
        const account = async ()=>{
            const acc = await users();
@@ -43,7 +58,7 @@ export const FeedPreview = () => {
         settokeId(res.request.id);
       }
           } catch (error) {
-            settokeId(6);
+            settokeId(1);
           }   
      }
       generateId();
@@ -82,8 +97,33 @@ export const FeedPreview = () => {
 
    }, []);
 
- 
+   
+useEffect(() => {
+ try {
+  const existRol = async() =>{
+    const cantRol = await getRoless();
     
+    setisRol(cantRol.length);
+  }
+  existRol();
+  if(isRol !=2){ const createRoles = async(rol)=>{
+        console.log("Join in createRoles")
+       const msj = await createdRolNest(rol);
+       console.log("msj rol: ",msj);
+       }
+    roles.map((r)=>{
+      console.log(r);
+createRoles(r);
+    });
+   setisRol(false); 
+  }
+ } catch (error) {
+  console.log("Rol alreay exist!")
+ }
+  
+}, []);
+
+   
    const [positionBtnStorie, setpositionBtnStorie] = useState(0)
 
    useEffect(() => {
@@ -259,7 +299,7 @@ const [messages, setmessages] = useState([])
 const receptor = useRef([]);
 const handleInteraction =  async (id) =>{
 //console.log(receptor.current.__reactFiber$9sappbzwypi.key);
- await interactionUser(tokeId,id,message?message:"empty");
+// await interactionUser(tokeId,id,message?message:"empty");
 const msjs= await getInteraction(tokeId,chatIds);
 setmessages(msjs);
 console.log(messages)
