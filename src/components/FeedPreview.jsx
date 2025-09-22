@@ -28,6 +28,21 @@ export const FeedPreview = () => {
   const [roles, setroles] = useState(["admin","user"])
   const [isRol, setisRol] = useState(0);
   const [exists, setexists] = useState(true);
+  const [messages, setmessages] = useState([]);
+
+   useEffect(() => {
+   const execMessages = async () =>{
+   if(!tokeId && !chatIds){   
+       const msjs= await getInteraction(tokeId,chatIds);
+        setmessages(msjs);
+    }else{
+      console.log(tokeId,chatIds);
+   }
+    };
+const interval = setInterval(execMessages, 3000); 
+return ()=> clearInterval(interval);
+  }, [tokeId,chatIds]);
+  
     useEffect(  () => {
 
        const createUseDefault =async() =>{
@@ -201,7 +216,7 @@ const receptor2 = useRef(null);
     const data = await getInteraction(tokeId,id);
     if(data)
      setmessages(data);
-     console.log(data);
+     
     }
      
     }
@@ -295,7 +310,7 @@ refUploadStorie.current.click();
 
 const [clickeo, setclickeo] = useState(null);
 
-const [messages, setmessages] = useState([])
+
 const receptor = useRef([]);
 const handleInteraction =  async (id) =>{
 //console.log(receptor.current.__reactFiber$9sappbzwypi.key);

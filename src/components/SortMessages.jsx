@@ -4,7 +4,7 @@ import { DeepseekNest } from "../connectionApi/Api"
 
 export const SortMessages = ({i,emisor,id}) => {
   
-    console.log(emisor);
+    //console.log(emisor);
    
    if(id){return (
         <>
