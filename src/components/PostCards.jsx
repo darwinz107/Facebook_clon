@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { geminiNest } from '../connectionApi/Api';
-import { SideComments } from './sideComments';
+import { SideComments } from './SideComments';
 import { WindowLogin } from './WindowLogin';
 import { ControlVideo } from './ControlVideo';
-import { WindowPost } from './windowPost';
+import { WindowPost } from './WindowPost';
 
 
 export const PostCards = ({post,deletepost}) => {

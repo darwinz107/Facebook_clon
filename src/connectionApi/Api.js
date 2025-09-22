@@ -1,12 +1,13 @@
 
 import { InferenceClient } from "@huggingface/inference";
+import { data } from "react-router-dom";
 
-
+const route = "https://facebook-clon-nestjs-production.up.railway.app/user/";
 export const handlerApi = async (e,name,cellphone,email,password)=>{
 
     e.preventDefault();
 
-    const response = await fetch("http://localhost:3000/app/register",{
+    const response = await fetch(`${route}app/register`,{
         
         method:"POST",
         headers:{
@@ -25,7 +26,7 @@ export const registerApi = async (name,cellphone,email,password)=>{
 
    
 
-    const response = await fetch("http://localhost:3000/app/register",{
+    const response = await fetch(`${route}app/register`,{
         
         method:"POST",
         headers:{
@@ -46,7 +47,7 @@ export const registerApi = async (name,cellphone,email,password)=>{
 
 export const resgisterUserNest = async (name,cellphone,email,password,gender) =>{
 
-    const response = await fetch("http://localhost:3000/user/create",{
+    const response = await fetch(`${route}create`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -55,14 +56,16 @@ export const resgisterUserNest = async (name,cellphone,email,password,gender) =>
     });
 
     const data = await response.text();
-    return alert(data);
+    if(data != ""){
+        return alert(data);}
+    
 }
 
 export const getTokenH = async ()=>{
 
     
 
-    const response = await fetch("http://localhost:3000/tokeHuggin/token",{
+    const response = await fetch(`${route}tokeHuggin/token`,{
         
         method:"GET",
         headers:{
@@ -79,7 +82,7 @@ export const getTokenH = async ()=>{
 export const chatIA=async (prompts,token)=>{
 
    
-  const response = await  fetch("https://api-inference.huggingface.co/models/facebook/bart-large-cnn",{
+  const response = await  fetch(`https://api-inference.huggingface.co/models/facebook/bart-large-cnn`,{
     method:"POST",
        headers:{
         "Authorization":`Bearer ${token}`,
@@ -131,7 +134,7 @@ return chatCompletion.choices[0].message.content;
 
 export const DeepseekNest = async (prompt) =>{
   
-    const response = await fetch("http://localhost:3000/user/deepseek",{
+    const response = await fetch(`${route}deepseek`,{
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -144,7 +147,7 @@ export const DeepseekNest = async (prompt) =>{
 
 export const geminiNest = async (prompt) =>{
     
-    const response = await fetch("http://localhost:3000/user/gemini",{
+    const response = await fetch(`${route}gemini`,{
      method:'POST',
      headers:{
         'Content-Type':'application/json'
@@ -157,7 +160,7 @@ export const geminiNest = async (prompt) =>{
 
 export const generateImg = async (prompt)=>{
 
-    const response = await fetch("http://localhost:3000/generate/image",{
+    const response = await fetch(`${route}generate/image`,{
         
         method:"POST",
         headers:{
@@ -176,7 +179,7 @@ export const generateImg = async (prompt)=>{
 
 export const redtubeAPI = async() =>{
 
- const response = await fetch("http://localhost:3000/user/redtube",{
+ const response = await fetch(`${route}redtube`,{
   method:'GET'
  });
 
@@ -187,7 +190,7 @@ export const redtubeAPI = async() =>{
 
 
 export const apiTestVideos = async() =>{
-    const response = await fetch("http://localhost:3000/user/generate/imgStorie",{
+    const response = await fetch(`${route}generate/imgStorie`,{
         method:'GET'
     });
 
@@ -197,7 +200,7 @@ export const apiTestVideos = async() =>{
 }
 
 export const users = async() =>{
-    const response = await fetch("http://localhost:3000/user/infoUsers",{
+    const response = await fetch(`${route}infoUsers`,{
         method:'GET',
         //credentials:'include'
     });
@@ -206,7 +209,7 @@ export const users = async() =>{
 }
 
 export const interaction = async(id,id2,message)=>{
-    const response = await fetch(`http://localhost:3000/user/interaction/${id}/${id2}`,{
+    const response = await fetch(`${route}interaction/${id}/${id2}`,{
     method:'POST',
     headers:{
         'Content-Type':'application/json'
@@ -217,10 +220,12 @@ export const interaction = async(id,id2,message)=>{
     });
 
     const data = await response.json();
+
+    return data;
 }
 
 export const getInteraction = async(id,id2) =>{
-    const response = await fetch(`http://localhost:3000/user/loadInteraction/${id}/${id2}`,{
+    const response = await fetch(`${route}loadInteraction/${id}/${id2}`,{
         method:"GET"
     })
 
@@ -229,11 +234,32 @@ export const getInteraction = async(id,id2) =>{
 }
 
 export const getIdToken = async()=>{
-    const response = await fetch("http://localhost:3000/user/facebook",{
+    const response = await fetch(`${route}facebook`,{
     method:"GET",
     credentials:"include"
     });
 
+    const data = await response.json();
+    return data;
+}
+
+export const createdRolNest = async(rol)=>{
+    const response = await fetch(`${route}post/rol`,{
+     method:"POST",
+     headers:{
+        "Content-Type":"application/json"
+     },
+     body:JSON.stringify({rol})
+    });
+    
+    const data = await response.json();
+    return data;
+}
+
+export const getRoless = async()=>{
+    const response = await fetch(`${route}get/roles`,{
+        method:"GET"
+    });
     const data = await response.json();
     return data;
 }

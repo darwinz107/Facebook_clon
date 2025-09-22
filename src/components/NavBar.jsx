@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate,Navigate } from 'react-router-dom'
 import { validateRolNest } from '../methods/validateRol';
 import { logout } from '../methods/token';
 
@@ -14,7 +14,9 @@ const handleProfileBar = () => setshowMenu(!showMenu);
 const logoutSession = async () =>{
    const msj = await logout();
    alert(msj.session);
-   navigate('/login')
+  
+   //<Navigate to={"/"}></Navigate>
+   navigate('/');
 }
     const autorizado = async(e) =>{
         e.preventDefault()

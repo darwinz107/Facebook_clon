@@ -1,14 +1,14 @@
 import { jwtDecode } from "jwt-decode";
 
     const token = localStorage.getItem("token");
-    
+    const route = "https://facebook-clon-nestjs-production.up.railway.app/";
 
 
 export const generateInfoUser = async () =>{
     
 const decoded = jwtDecode(token);
     console.log(`this is id: ${decoded.id}`)
-    const response = await fetch(`http://localhost:3000/auth/user/${decoded.id}`,{
+    const response = await fetch(`${route}auth/user/${decoded.id}`,{
       
         method:'GET',
     });
@@ -20,7 +20,7 @@ const decoded = jwtDecode(token);
 
 export const updateInfoUser = async (name,cellphone,email) =>{
 const decoded = jwtDecode(token);
-    const response = await fetch(`http://localhost:3000/auth/update/${decoded.id}`,{
+    const response = await fetch(`${route}auth/update/${decoded.id}`,{
         method:'PUT',
         headers:{
           "Content-Type":"application/json"
@@ -33,7 +33,7 @@ const decoded = jwtDecode(token);
 
 export const updateInfoNest = async () =>{
 
-    const response = await fetch("http://localhost:3000/user/insert/infoUpdate",{
+    const response = await fetch(`${route}user/insert/infoUpdate`,{
      method:'GET',
      credentials:'include'
     });
@@ -44,7 +44,7 @@ export const updateInfoNest = async () =>{
 
 export const updateProfileNest = async (name,cellphone,email,gender) =>{
 
-    const response = await fetch("http://localhost:3000/user/update",{
+    const response = await fetch(`${route}user/update`,{
         method:'PATCH',
         credentials:'include',
         headers:{
