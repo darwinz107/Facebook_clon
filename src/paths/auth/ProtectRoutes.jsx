@@ -8,23 +8,27 @@ const [validate, setvalidate] = useState(false)
     useEffect(() => {
       const functProtRt = async () =>{
 
-  
-    const bool = await existToken();
+  try {
+     const bool = await existToken();
+     console.log("Estoy en ProtectRoutes y este es bool:");
   console.log(bool);
-    if(bool.access){
+  setvalidate(bool.log);
+   /* if(bool.log){
       return route;
     }else{
       navigate("/");
       <Navigate to={"/"}></Navigate>
-    }
+    }*/
+  } catch (error) {
+     console.error(error);
   
-  console.error(error);
-  navigate("/");
-  <Navigate to={"/"}></Navigate>
-  
+  }
+
       }
       functProtRt();
     }, [route])
     
-
+if(validate==null) return <div>loading...</div>  
+//if(validate == false) return  <Navigate to={"/"}></Navigate> 
+return route
 }

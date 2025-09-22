@@ -2,7 +2,7 @@
 import { InferenceClient } from "@huggingface/inference";
 import { data } from "react-router-dom";
 
-const route = "http://localhost:3000/user/";
+const route = "https://facebook-clon-nestjs-production.up.railway.app/user/";
 export const handlerApi = async (e,name,cellphone,email,password)=>{
 
     e.preventDefault();
@@ -220,6 +220,8 @@ export const interaction = async(id,id2,message)=>{
     });
 
     const data = await response.json();
+
+    return data;
 }
 
 export const getInteraction = async(id,id2) =>{

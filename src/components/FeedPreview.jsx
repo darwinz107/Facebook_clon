@@ -186,7 +186,7 @@ const receptor2 = useRef(null);
     const functionChatOpenBaxter = async (id,boolId) =>{
     console.log("I just joined to functionChatOpenBaxter")
     console.log(id);
-    //setchatIds(id);
+    setchatIds(id);
     const copy = [...chatOpenBaxter]
     
     copy[boolId] = !copy[boolId];
@@ -299,11 +299,18 @@ const [messages, setmessages] = useState([])
 const receptor = useRef([]);
 const handleInteraction =  async (id) =>{
 //console.log(receptor.current.__reactFiber$9sappbzwypi.key);
-// await interactionUser(tokeId,id,message?message:"empty");
+const registerInter =  await interactionUser(tokeId,id,message?message:"empty");
+console.log(tokeId,chatIds);
 const msjs= await getInteraction(tokeId,chatIds);
 setmessages(msjs);
-console.log(messages)
+console.log(registerInter);
+console.log(msjs);
 }
+
+/*useEffect(() => {
+ console.log(messages)
+}, [messages]);
+*/
 
   return (
     <>
@@ -405,7 +412,7 @@ console.log(messages)
       {msjArray.map(
         (msj,i) => (
         
-        <SortMessages i={i} emisor={msj}></SortMessages>)
+        <SortMessages i={i} emisor={msj} id={0}></SortMessages>)
       )}
       <div className='chatdown'>
         <input type="text"

@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode"
-const route = "http://localhost:3000/";
+const route = "https://facebook-clon-nestjs-production.up.railway.app/";
 /*
 export const validateRol = () =>{
 
@@ -28,11 +28,13 @@ export const validateRolNest = async () =>{
 }
 
 export const existToken = async ()=>{
-    const response = await fetch(`${route}user/token`,{
+    const response = await fetch(`${route}user/get/token`,{
         method:"GET",
         credentials:'include'
     });
 
     const data = await response.json();
+    console.log(`Estoy en existToken y este es data:`);
+    console.log(data);
     return data;
 }

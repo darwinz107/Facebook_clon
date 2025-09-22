@@ -1,5 +1,5 @@
 
-const route = "http://localhost:3000/";
+const route = "https://facebook-clon-nestjs-production.up.railway.app/";
  
 export const validation = async (email,password) =>{
 
