@@ -44,8 +44,7 @@ Proyecto de un clon de Facebook con **chat funcional entre usuarios**. Este proy
 ###Funcionalidades principales
 
 **Registro y login**
-![Registro y login]
-(src/assets/gifs/registro.gif)
+![Registro y login](src/assets/gifs/registro.gif)
 
 **Chat entre usuarios**
 ![Chat emisor](src/assets/gifs/emisor.gif)
