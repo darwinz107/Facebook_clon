@@ -1,5 +1,6 @@
 import { jwtDecode } from "jwt-decode"
-const route = "https://facebook-clon-nestjs-production.up.railway.app/";
+const route = " http://localhost:3000/";
+const route2 = "https://facebook-clon-nestjs-production.up.railway.app/";
 /*
 export const validateRol = () =>{
 
@@ -18,7 +19,7 @@ export const validateRol = () =>{
 }*/
 
 export const validateRolNest = async () =>{
-    const response = await fetch(`${route}user/rol`,{
+    const response = await fetch(`${route2}user/rol`,{
         method:'GET',
         credentials:'include'
     });
@@ -28,7 +29,7 @@ export const validateRolNest = async () =>{
 }
 
 export const existToken = async ()=>{
-    const response = await fetch(`${route}user/get/token`,{
+    const response = await fetch(`${route2}user/get/token`,{
         method:"GET",
         credentials:'include'
     });

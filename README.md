@@ -7,11 +7,11 @@ Proyecto de un clon de Facebook con **chat funcional entre usuarios**. Este proy
 ## Tecnologías utilizadas
 
 - **Frontend:** React, Vite, CSS
-- **Backend:** NestJS, Node.js, TypeScript
+- **Backend:** NestJS, Node.js,JavaScript y TypeScript
 - **Base de datos:** MySQL
 - **Procedimientos almacenados:** para manejo de chat y mensajes
 - **Deploy:** 
-  - Frontend en Netlify: [https://glittering-banoffee-ac051f.netlify.app/](https://glittering-banoffee-ac051f.netlify.app/)
+  - Frontend en Netlify: [clon-face-book-dz.netlify.app/](clon-face-book-dz.netlify.app/)
   - Backend en Railway: [facebook-clon-nestjs-production.up.railway.app]
 
 ## Funcionalidades principales
@@ -57,4 +57,3 @@ Proyecto de un clon de Facebook con **chat funcional entre usuarios**. Este proy
 ```bash
 git clone https://github.com/darwinz107/Facebook_clon.git
 git clone https://github.com/darwinz107/Facebook-Clon-NestJs.git
-

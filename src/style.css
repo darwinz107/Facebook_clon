@@ -4,6 +4,16 @@
     
 }
 
+.feedPreview{
+    min-height: 120vh;
+}
+.audioKz{
+    display: none;
+}
+.footer{
+    background-color: gray;
+    text-align: center;
+}
 
 .form{
 
@@ -13,7 +23,9 @@ text-align: center;
 
 button{
     cursor: pointer;
+    
 }
+
 
 img{
 
@@ -826,3 +838,4 @@ border-radius: 100%;
 .uploadStorie{
     display: none;
 }
+

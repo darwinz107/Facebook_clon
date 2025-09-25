@@ -1,13 +1,14 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
-import { apiTestVideos, createdRolNest, DeepseekNest, getIdToken, getInteraction, getRoless, redtubeAPI, resgisterUserNest, users } from '../connectionApi/Api';
+import { apiTestVideos, createdRolNest, DeepseekNest, getIdToken, getInteraction, getMsjReceptors, getRoless, msjNotSeen, msjsNotSeenByUser, redtubeAPI, resgisterUserNest, updateLikeSeen, users } from '../connectionApi/Api';
 import { SortMessages } from './SortMessages';
 import { NewPost } from './NewPost';
 import { SetVideos } from './SetVideos';
 import { setVideoSrorie } from '../methods/setVideoSrorie';
 import { UploadNewStorie } from './UploadNewStorie';
 import { interactionUser } from '../methods/communication/interactionUser';
+import { Footer } from './Footer';
 
 export const FeedPreview = () => {
   
@@ -29,19 +30,12 @@ export const FeedPreview = () => {
   const [isRol, setisRol] = useState(0);
   const [exists, setexists] = useState(true);
   const [messages, setmessages] = useState([]);
+  const [msjNews, setmsjNews] = useState([]);
+  const [firstPerfomance, setfirstPerfomance] = useState(false);
+  const [lgtMsjNews, setlgtMsjNews] = useState(0);
+  const [totalNotSeen, settotalNotSeen] = useState(0)
+  const [lgtByUsers, setlgtByUsers] = useState([]);
 
-   useEffect(() => {
-   const execMessages = async () =>{
-   if(!tokeId && !chatIds){   
-       const msjs= await getInteraction(tokeId,chatIds);
-        setmessages(msjs);
-    }else{
-      console.log(tokeId,chatIds);
-   }
-    };
-const interval = setInterval(execMessages, 3000); 
-return ()=> clearInterval(interval);
-  }, [tokeId,chatIds]);
   
     useEffect(  () => {
 
@@ -57,14 +51,7 @@ return ()=> clearInterval(interval);
        }
        createUseDefault();
       
-       const account = async ()=>{
-           const acc = await users();
-           setaccountss(acc);
-           const arry = []
-           acc.map((a)=>arry.push(false));
-           setchatOpenBaxter(arry);
-       };
-      account();
+     
         const generateId = async()=>{
           try {
               const res = await getIdToken();
@@ -112,7 +99,91 @@ return ()=> clearInterval(interval);
 
    }, []);
 
+   useEffect(() => {
+    const account = async ()=>{
+           const acc = await users();
+           
+           const arry = []
+           acc.map((a)=>arry.push(false));
+           setchatOpenBaxter(arry);}
+           account();
+   }, [])
    
+
+useEffect(() => {
+    const account = async ()=>{
+          const acc = await users();
+          setaccountss(acc);
+         const arrNotSeen = await Promise.all(
+          
+          acc.map(async (a)=>{
+            console.log(tokeId);
+            const arrayNotSeen = await msjsNotSeenByUser(tokeId,a.id);
+            
+           return {id:a.id,lenghtMsj:arrayNotSeen.length};
+          })
+         );
+         setlgtByUsers(arrNotSeen);
+         console.log("I'd like you to meet janie, she's gonna be my new roommate!");
+         console.log(arrNotSeen);
+       };
+
+       if(tokeId){ account();};
+     
+}, [tokeId,showChat,chatOpenBaxter]);
+
+
+
+  const audioKz = useRef([]);
+
+   useEffect(() => {
+   const execMessages = async () =>{
+   const msjRps = await getMsjReceptors(tokeId);
+  console.log(msjRps);
+ // console.log(audioKz);
+  setmsjNews(msjRps);
+
+  
+  
+    if(msjRps.length != lgtMsjNews && firstPerfomance){
+      //console.log(msjRps.length);
+      //console.log("msjLenght",lgtMsjNews);
+      console.log("Reproduciendo audio");
+      console.log(audioKz);
+      audioKz.current.play();
+      setlgtMsjNews(msjRps.length);
+      
+    }
+    if(firstPerfomance == false){
+      
+      setfirstPerfomance(true);
+      setlgtMsjNews(msjRps.length);
+     
+    }
+   
+   if(tokeId && chatIds){   
+       const msjs= await getInteraction(tokeId,chatIds);
+        setmessages(msjs);
+    }else{
+      console.log(tokeId,chatIds);
+   }
+    };
+const interval = setInterval(execMessages, 3000); 
+return ()=> clearInterval(interval);
+  }, [tokeId,chatIds,lgtMsjNews]);
+
+ useEffect(() => {
+
+  const f_msjNotSeen =async()=>{
+    const total = await msjNotSeen(tokeId);  
+    settotalNotSeen(total.length);
+  }
+  f_msjNotSeen();
+  console.log("f_msjNotSeen");
+     
+ }, [tokeId,totalNotSeen,chatOpenBaxter])
+ 
+  
 useEffect(() => {
  try {
   const existRol = async() =>{
@@ -216,7 +287,7 @@ const receptor2 = useRef(null);
     const data = await getInteraction(tokeId,id);
     if(data)
      setmessages(data);
-     
+     updateLikeSeen(tokeId,id);
     }
      
     }
@@ -329,6 +400,7 @@ console.log(msjs);
 
   return (
     <>
+    <audio src="src\assets\audio\smite-nene-kappa-heeeeeeey_Xwqt5nG.mp3" ref={audioKz} className='audioKz' controls={true}>kz</audio>
     <div ref={refContainerStories} className='container-stories'>
      <UploadNewStorie setvideoStorie={setvideosStories} reffnewStorie={setrefUploadStorie} adjustContainerFlex={handleContainerStoriesNew}></UploadNewStorie>
       <div ref={containerFlex} className='container-flex'
@@ -408,14 +480,16 @@ console.log(msjs);
      <PostCards key={post.id} post={post} deletepost={deletePost} />   
     )      
     )}</div>
-    {!showChat&&(<div className='barChat' onClick={functionShowChat}>chats</div>)}
+    {!showChat&&(<div className='barChat' onClick={functionShowChat}>chats {totalNotSeen}</div>)}
     {showChat&&(
     
     <div className='barChatShow'>
       <div className='x' onClick={()=>functionShowChat()}>x</div>
       <div className='chats' onClick={functionChatOpen}>chefsitoGpt</div>
-      {accounts.map((acct,boolId)=>{ return(
-        <div className='chats' onClick={()=>functionChatOpenBaxter(acct.id,boolId)}>{acct.name ?acct.name:"xdxd"}</div>
+      {accounts.map((acct,boolId)=>{
+            
+        return(
+        <div className='chats' onClick={()=>functionChatOpenBaxter(acct.id,boolId)}>{acct.name ?acct.name:"xdxd"} <span>{lgtByUsers[boolId].lenghtMsj}</span></div>
       )})}
      
     </div>)}
