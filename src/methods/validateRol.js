@@ -19,7 +19,7 @@ export const validateRol = () =>{
 }*/
 
 export const validateRolNest = async () =>{
-    const response = await fetch(`${route2}user/rol`,{
+    const response = await fetch(`${route}user/rol`,{
         method:'GET',
         credentials:'include'
     });
@@ -29,7 +29,7 @@ export const validateRolNest = async () =>{
 }
 
 export const existToken = async ()=>{
-    const response = await fetch(`${route2}user/get/token`,{
+    const response = await fetch(`${route}user/get/token`,{
         method:"GET",
         credentials:'include'
     });

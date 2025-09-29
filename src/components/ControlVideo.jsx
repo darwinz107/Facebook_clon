@@ -1,10 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { base64ToBlob } from '../methods/Base64ToBlob';
 
 export const ControlVideo = ({ file, showfullPost }) => {
 
+    const [arcBlob, setarcBlob] = useState("");
+
     const blobUrl = useMemo(() => {  
    
-            return URL.createObjectURL(file);
+           const blob = base64ToBlob(file);
+           setarcBlob(blob);
+           
+            return URL.createObjectURL(blob);
   
     } , [file]);
 
@@ -26,7 +32,7 @@ export const ControlVideo = ({ file, showfullPost }) => {
 
   return (
         <>
-            {file.type.startsWith("image/") ? <img src={blobUrl} onClick={()=>showfullPost()}></img> : <video onClick={()=>showfullPost()} src={blobUrl} controls={true} ></video>}
+            {arcBlob.type !="video/mp4" ? <img src={blobUrl} onClick={()=>showfullPost()}></img> : <video onClick={()=>showfullPost()} src={blobUrl} controls={true} ></video>}
         </>
     )
     

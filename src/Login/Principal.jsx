@@ -9,7 +9,8 @@ export const Principal =()=>{
     return(
 <>
 <NavBar></NavBar>
-<FeedPreview></FeedPreview> 
+<div className='feedPreview'><FeedPreview/> </div>
+     <div className='footer'><Footer></Footer> </div>
     
 </>
     )

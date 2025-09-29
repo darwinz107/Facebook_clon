@@ -3,7 +3,7 @@ const route2 = "https://facebook-clon-nestjs-production.up.railway.app/";
 
 export const generateTokenNest = async(id:number) =>{
    
-    const response = await fetch(`${route2}user/token/${id}`,{
+    const response = await fetch(`${route}user/token/${id}`,{
      method: 'GET',
      credentials:'include'
     });
@@ -13,7 +13,7 @@ export const generateTokenNest = async(id:number) =>{
 }
 
 export const logout = async() =>{
-    const response = await fetch(`${route2}user/logout`,{
+    const response = await fetch(`${route}user/logout`,{
         method:'GET',
         credentials:'include'
     });

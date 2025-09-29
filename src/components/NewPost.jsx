@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react"
+import { convertToBase64 } from "../methods/ConvertToBase64"
+import { createPost } from "../connectionApi/Api"
+import { chargePosts } from "../methods/post/SavePost"
 
 
-export const NewPost = ({setPosts}) => {
+export const NewPost = ({setPosts,tokeId}) => {
 
     const [text, settext] = useState("")
     const [file, setfile] = useState("")
+    const [textPlane, settextPlane] = useState("");
 
-    const generateObjet = () =>{
-    
-       setPosts(prev => [...prev, {
-      id: Date.now().toString(),
-      author: "Anonymous",
-      avatar: "https://img.icons8.com/?size=100&id=7819&format=png&color=000000",
-      content: text,
-      image: file,
-      likes: 0,
-      comments: 0,
-      time: "Hace 2 horas"
-      
-    }]);
-    
-    
-       
+  // const savePost = await create
+
+
+    const generateObjet = async () =>{
+  
+
+   const fileInBase64 = await convertToBase64(file);
+  // settextPlane(fileInBase64);
+   // console.log(fileInBase64);
+
+      const postCreated = await createPost(tokeId,text,fileInBase64); 
+   console.log(postCreated);
+
+   chargePosts(setPosts);
     }
 
-  
-   
 
   return (
     <>

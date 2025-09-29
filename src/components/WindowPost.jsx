@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react"
 import { CommentFullWindow } from "./CommentFullWindow";
+import { base64ToBlob } from "../methods/Base64ToBlob";
 
 
 export const WindowPost = ({post,peopleComment,setpeopleComment,showfullPost,moreLikes,likes,deleteComment}) => {
@@ -17,7 +18,8 @@ export const WindowPost = ({post,peopleComment,setpeopleComment,showfullPost,mor
 
     const bloburl = useMemo(() =>{
         if(post.image){
-           return URL.createObjectURL(post.image);
+          const blob = base64ToBlob(post.image);
+           return URL.createObjectURL(blob);
         }
         return null;
     } , [post.image])

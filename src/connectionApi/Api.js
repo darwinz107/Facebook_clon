@@ -9,7 +9,7 @@ export const handlerApi = async (e,name,cellphone,email,password)=>{
 
     e.preventDefault();
 
-    const response = await fetch(`${route2}app/register`,{
+    const response = await fetch(`${route}app/register`,{
         
         method:"POST",
         headers:{
@@ -28,7 +28,7 @@ export const registerApi = async (name,cellphone,email,password)=>{
 
    
 
-    const response = await fetch(`${route2}app/register`,{
+    const response = await fetch(`${route}app/register`,{
         
         method:"POST",
         headers:{
@@ -49,7 +49,7 @@ export const registerApi = async (name,cellphone,email,password)=>{
 
 export const resgisterUserNest = async (name,cellphone,email,password,gender) =>{
 
-    const response = await fetch(`${route2}create`,{
+    const response = await fetch(`${route}create`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -67,7 +67,7 @@ export const getTokenH = async ()=>{
 
     
 
-    const response = await fetch(`${route2}tokeHuggin/token`,{
+    const response = await fetch(`${route}tokeHuggin/token`,{
         
         method:"GET",
         headers:{
@@ -136,7 +136,7 @@ return chatCompletion.choices[0].message.content;
 
 export const DeepseekNest = async (prompt) =>{
   
-    const response = await fetch(`${route2}deepseek`,{
+    const response = await fetch(`${route}deepseek`,{
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -149,7 +149,7 @@ export const DeepseekNest = async (prompt) =>{
 
 export const geminiNest = async (prompt) =>{
     
-    const response = await fetch(`${route2}gemini`,{
+    const response = await fetch(`${route}gemini`,{
      method:'POST',
      headers:{
         'Content-Type':'application/json'
@@ -162,7 +162,7 @@ export const geminiNest = async (prompt) =>{
 
 export const generateImg = async (prompt)=>{
 
-    const response = await fetch(`${route2}generate/image`,{
+    const response = await fetch(`${route}generate/image`,{
         
         method:"POST",
         headers:{
@@ -181,7 +181,7 @@ export const generateImg = async (prompt)=>{
 
 export const redtubeAPI = async() =>{
 
- const response = await fetch(`${route2}redtube`,{
+ const response = await fetch(`${route}redtube`,{
   method:'GET'
  });
 
@@ -192,7 +192,7 @@ export const redtubeAPI = async() =>{
 
 
 export const apiTestVideos = async() =>{
-    const response = await fetch(`${route2}generate/imgStorie`,{
+    const response = await fetch(`${route}generate/imgStorie`,{
         method:'GET'
     });
 
@@ -202,7 +202,7 @@ export const apiTestVideos = async() =>{
 }
 
 export const users = async() =>{
-    const response = await fetch(`${route2}infoUsers`,{
+    const response = await fetch(`${route}infoUsers`,{
         method:'GET',
         //credentials:'include'
     });
@@ -211,7 +211,7 @@ export const users = async() =>{
 }
 
 export const interaction = async(id,id2,message)=>{
-    const response = await fetch(`${route2}interaction/${id}/${id2}`,{
+    const response = await fetch(`${route}interaction/${id}/${id2}`,{
     method:'POST',
     headers:{
         'Content-Type':'application/json'
@@ -227,7 +227,7 @@ export const interaction = async(id,id2,message)=>{
 }
 
 export const getInteraction = async(id,id2) =>{
-    const response = await fetch(`${route2}loadInteraction/${id}/${id2}`,{
+    const response = await fetch(`${route}loadInteraction/${id}/${id2}`,{
         method:"GET"
     })
 
@@ -236,7 +236,7 @@ export const getInteraction = async(id,id2) =>{
 }
 
 export const getIdToken = async()=>{
-    const response = await fetch(`${route2}facebook`,{
+    const response = await fetch(`${route}facebook`,{
     method:"GET",
     credentials:"include"
     });
@@ -246,7 +246,7 @@ export const getIdToken = async()=>{
 }
 
 export const createdRolNest = async(rol)=>{
-    const response = await fetch(`${route2}post/rol`,{
+    const response = await fetch(`${route}post/rol`,{
      method:"POST",
      headers:{
         "Content-Type":"application/json"
@@ -259,7 +259,7 @@ export const createdRolNest = async(rol)=>{
 }
 
 export const getRoless = async()=>{
-    const response = await fetch(`${route2}get/roles`,{
+    const response = await fetch(`${route}get/roles`,{
         method:"GET"
     });
     const data = await response.json();
@@ -267,7 +267,7 @@ export const getRoless = async()=>{
 }
 
 export const getMsjReceptors = async(id)=>{
-    const response = await fetch(`${route2}messages/receptor/${id}`,{
+    const response = await fetch(`${route}messages/receptor/${id}`,{
        method:"GET"
     });
 
@@ -277,7 +277,7 @@ export const getMsjReceptors = async(id)=>{
 
 
 export const msjNotSeen = async(id)=>{
-  const response = await fetch(`${route2}total/notseen/${id}`,{
+  const response = await fetch(`${route}total/notseen/${id}`,{
     method:"GET"
   });
 
@@ -286,7 +286,7 @@ export const msjNotSeen = async(id)=>{
 }
 
 export const msjsNotSeenByUser = async(id,id2)=>{
-  const response = await fetch(`${route2}notseenbyuser/${id}/${id2}`,{
+  const response = await fetch(`${route}notseenbyuser/${id}/${id2}`,{
     method:"GET"
   });
 
@@ -295,7 +295,7 @@ export const msjsNotSeenByUser = async(id,id2)=>{
 }
 
 export const updateLikeSeen = async(id,id2)=>{
-  const response = await fetch(`${route2}change/seen/${id}/${id2}`,{
+  const response = await fetch(`${route}change/seen/${id}/${id2}`,{
     method:"PATCH",
     headers:{
         "Content-Type":"application/json"
@@ -305,4 +305,35 @@ export const updateLikeSeen = async(id,id2)=>{
 
   const data = await response.json();
   return data;
+}
+
+export const createPost = async(id,description,content)=>{
+  const response = await fetch(`${route}create/post/${id}`,{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({id,description,content})
+  });
+  const data = await response.json();
+  return data;
+}
+
+export const allPosts = async()=>{
+    const response = await fetch(`${route}all/posts`,{
+        method:"GET"
+    });
+
+    const data = await response.json();
+    return data;
+}
+
+export const deletePost = async(id)=>{
+
+    const response = await fetch(`${route}posts/${id}`,{
+        method:"DELETE"
+    });
+
+    const data = await response.json();
+    return data;
 }

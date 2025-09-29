@@ -5,7 +5,7 @@ const route2 = "https://facebook-clon-nestjs-production.up.railway.app/";
 export const validation = async (email,password) =>{
 
 
-    const response = await fetch(`${route2}user/validation/validation`,{
+    const response = await fetch(`${route}user/validation/validation`,{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
@@ -28,7 +28,7 @@ export const validation = async (email,password) =>{
 
     
  
-    const response = await fetch(`${route2}user/validate/login`,{
+    const response = await fetch(`${route}user/validate/login`,{
      method:'POST',
      headers:{
         'Content-Type':'application/json'

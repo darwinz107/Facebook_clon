@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
-import { apiTestVideos, createdRolNest, DeepseekNest, getIdToken, getInteraction, getMsjReceptors, getRoless, msjNotSeen, msjsNotSeenByUser, redtubeAPI, resgisterUserNest, updateLikeSeen, users } from '../connectionApi/Api';
+import { allPosts, apiTestVideos, createdRolNest, DeepseekNest, getIdToken, getInteraction, getMsjReceptors, getRoless, msjNotSeen, msjsNotSeenByUser, redtubeAPI, resgisterUserNest, updateLikeSeen, users } from '../connectionApi/Api';
 import { SortMessages } from './SortMessages';
 import { NewPost } from './NewPost';
 import { SetVideos } from './SetVideos';
@@ -9,6 +9,7 @@ import { setVideoSrorie } from '../methods/setVideoSrorie';
 import { UploadNewStorie } from './UploadNewStorie';
 import { interactionUser } from '../methods/communication/interactionUser';
 import { Footer } from './Footer';
+import { chargePosts } from '../methods/post/SavePost';
 
 export const FeedPreview = () => {
   
@@ -35,6 +36,7 @@ export const FeedPreview = () => {
   const [lgtMsjNews, setlgtMsjNews] = useState(0);
   const [totalNotSeen, settotalNotSeen] = useState(0)
   const [lgtByUsers, setlgtByUsers] = useState([]);
+  const [fakePosts, setfakePosts] = useState([]);
 
   
     useEffect(  () => {
@@ -108,6 +110,11 @@ export const FeedPreview = () => {
            setchatOpenBaxter(arry);}
            account();
    }, [])
+
+  /* useEffect(() => {
+     const getPosts = await 
+   }, [tokeId])*/
+   
    
 
 useEffect(() => {
@@ -130,7 +137,7 @@ useEffect(() => {
 
        if(tokeId){ account();};
      
-}, [tokeId,showChat,chatOpenBaxter]);
+}, [tokeId,showChat,messages]);
 
 
 
@@ -168,6 +175,7 @@ useEffect(() => {
       console.log(tokeId,chatIds);
    }
     };
+    //Esto sirve para que se ejecute cada 3 seg, solo pongo el metodo que quiero que se ejecute dentro de setInterval.
 const interval = setInterval(execMessages, 3000); 
 return ()=> clearInterval(interval);
   }, [tokeId,chatIds,lgtMsjNews]);
@@ -183,6 +191,18 @@ return ()=> clearInterval(interval);
      
  }, [tokeId,totalNotSeen,chatOpenBaxter])
  
+
+ useEffect(() => {
+ 
+  chargePosts(setfakePosts);
+  
+ }, []);
+
+ /*useEffect(() => {
+  console.log(fakePosts);
+ }, [fakePosts])
+ 
+ */
   
 useEffect(() => {
  try {
@@ -354,11 +374,15 @@ const receptor2 = useRef(null);
     }
   ];
 
-  const [fakePosts, setfakePosts] = useState([])
   
-  const deletePost = (id) =>{
+  
+  const deletePost = async (id) =>{
     
-     setfakePosts(prev=> prev.filter((prev)=> prev.id !== id));
+    const msjdelete = await deletePost(id);
+    alert(msjdelete.msj);
+    chargePosts(setfakePosts);
+
+    // setfakePosts([]);
   }
  const reff = useRef([]);
  const refContainerStories = useRef(null);
@@ -400,7 +424,7 @@ console.log(msjs);
 
   return (
     <>
-    <audio src="src\assets\audio\smite-nene-kappa-heeeeeeey_Xwqt5nG.mp3" ref={audioKz} className='audioKz' controls={true}>kz</audio>
+    <audio h src="/smite-nene-kappa-heeeeeeey_Xwqt5nG.mp3"  ref={audioKz} className='audioKz'  controls={true}>kz</audio>
     <div ref={refContainerStories} className='container-stories'>
      <UploadNewStorie setvideoStorie={setvideosStories} reffnewStorie={setrefUploadStorie} adjustContainerFlex={handleContainerStoriesNew}></UploadNewStorie>
       <div ref={containerFlex} className='container-flex'
@@ -473,7 +497,7 @@ console.log(msjs);
         
     </div>
     
-    <NewPost setPosts={setfakePosts} ></NewPost>
+    <NewPost setPosts={setfakePosts} tokeId={tokeId}></NewPost>
 
      <div className='postcardInstancia'>
     { fakePosts.map((post)=>(
