@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import { geminiNest } from '../connectionApi/Api';
+import { geminiNest, updatePosts } from '../connectionApi/Api';
 import { SideComments } from './SideComments';
 import { WindowLogin } from './WindowLogin';
 import { ControlVideo } from './ControlVideo';
 import { WindowPost } from './WindowPost';
+import { chargePosts } from '../methods/post/SavePost';
 
 
-export const PostCards = ({post,deletepost}) => {
+export const PostCards = ({post,deletepost,setfakePosts}) => {
 
 
 
@@ -37,9 +38,12 @@ const [showPostFull, setshowPostFull] = useState(false)
 
 const showfullPost = ()=> setshowPostFull(!showPostFull);
 
-const [showOptions, setshowOptions] = useState(false)
+const [showOptions, setshowOptions] = useState(false);
+const [inputUpdate, setinputUpdate] = useState(false);
+const [textPost, settextPost] = useState("");
 
 const changeStateOption = () => setshowOptions(!showOptions);
+
 
   const addComment = () =>{
   setpeopleComment(prev => [...prev,{id:peopleComment.length +1,
@@ -57,6 +61,15 @@ const changeStateOption = () => setshowOptions(!showOptions);
  
   const deleteComment = (id) =>{
     setpeopleComment(prev => prev.filter((post)=> post.id !==id));
+  }
+
+  const updateDescriptionPost = async () =>{
+
+    const msjUpdated = await updatePosts(post.id,textPost);
+    console.log(msjUpdated);
+    chargePosts(setfakePosts);
+    alert(msjUpdated.msj);
+    setinputUpdate(false);
   }
   
 /*
@@ -129,14 +142,16 @@ const changeStateOption = () => setshowOptions(!showOptions);
         
         <div className='options'><button onClick={changeStateOption}>...</button>
         {showOptions&& <div className='child-options'>
-          <button>update</button>
+          <button onClick={()=>{
+            settextPost(post.content);
+            setinputUpdate(true);}}>update</button>
           <button onClick={()=> deletepost(post.id)}>delete</button>
         </div>}
         </div>
     </div>
   <div className='post-div' id={postDiv}>
    
-    <div>{post.content}</div>
+   {!inputUpdate ?<div>{post.content}</div> : <div><input type="text" value={textPost} onChange={(e)=>settextPost(e.target.value)}/> <button onClick={updateDescriptionPost}>Ok</button> <button onClick={()=>setinputUpdate(false)}>Cancel</button></div>} 
     
      <ControlVideo file={post.image} showfullPost={showfullPost}></ControlVideo>
 </div>

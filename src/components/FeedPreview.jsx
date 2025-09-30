@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { PostCards } from './PostCards';
 import { StoriesPreview } from './StoriesPreview';
-import { allPosts, apiTestVideos, createdRolNest, DeepseekNest, getIdToken, getInteraction, getMsjReceptors, getRoless, msjNotSeen, msjsNotSeenByUser, redtubeAPI, resgisterUserNest, updateLikeSeen, users } from '../connectionApi/Api';
+import { allPosts, apiTestVideos, createdRolNest, DeepseekNest, deletePost, getIdToken, getInteraction, getMsjReceptors, getRoless, msjNotSeen, msjsNotSeenByUser, redtubeAPI, resgisterUserNest, updateLikeSeen, users } from '../connectionApi/Api';
 import { SortMessages } from './SortMessages';
 import { NewPost } from './NewPost';
 import { SetVideos } from './SetVideos';
@@ -24,19 +24,20 @@ export const FeedPreview = () => {
   const [limitMove2, setlimitMove2] = useState(0);
   const [videosStories, setvideosStories] = useState([]);
   const [tokeId, settokeId] = useState()
-  const [chatIds, setchatIds] = useState(0)
+  const [chatIds, setchatIds] = useState(null)
   const [accounts, setaccountss] = useState([])
   const [chatOpenBaxter, setchatOpenBaxter] = useState([]);
   const [roles, setroles] = useState(["admin","user"])
   const [isRol, setisRol] = useState(0);
   const [exists, setexists] = useState(true);
   const [messages, setmessages] = useState([]);
-  const [msjNews, setmsjNews] = useState([]);
+ // const [msjNews, setmsjNews] = useState([]);
   const [firstPerfomance, setfirstPerfomance] = useState(false);
   const [lgtMsjNews, setlgtMsjNews] = useState(0);
   const [totalNotSeen, settotalNotSeen] = useState(0)
   const [lgtByUsers, setlgtByUsers] = useState([]);
   const [fakePosts, setfakePosts] = useState([]);
+  const [lgtPostsNews, setlgtPostsNews] = useState(0);
 
   
     useEffect(  () => {
@@ -143,18 +144,23 @@ useEffect(() => {
 
   const audioKz = useRef([]);
 
+
+  //****UseEffect para revisar si hay mensajes nuevos cada 3 seg****
    useEffect(() => {
    const execMessages = async () =>{
    const msjRps = await getMsjReceptors(tokeId);
-  console.log(msjRps);
+   const postRps = await allPosts();
+  
  // console.log(audioKz);
-  setmsjNews(msjRps);
+ // setmsjNews(msjRps);
 
   
-  
+  //Valida si la cantidad de mensajes nuevos es diferente a la ultima cantidad guardada y si firstPerfomance es true
     if(msjRps.length != lgtMsjNews && firstPerfomance){
       //console.log(msjRps.length);
       //console.log("msjLenght",lgtMsjNews);
+
+      //Reproduce el audio y actualiza la cantidad de mensajes nuevos
       console.log("Reproduciendo audio");
       console.log(audioKz);
       audioKz.current.play();
@@ -167,7 +173,15 @@ useEffect(() => {
       setlgtMsjNews(msjRps.length);
      
     }
+    //Valida que los posts hayan cambiado para actualizarlos en tiempo real
+    if(postRps.length != lgtPostsNews){
+      chargePosts(setfakePosts);
+      setlgtPostsNews(postRps.length);
+    }else{
+      console.log(`Posts are same: ${postRps.length} - ${lgtPostsNews}`);
+    }
    
+    //
    if(tokeId && chatIds){   
        const msjs= await getInteraction(tokeId,chatIds);
         setmessages(msjs);
@@ -179,6 +193,8 @@ useEffect(() => {
 const interval = setInterval(execMessages, 3000); 
 return ()=> clearInterval(interval);
   }, [tokeId,chatIds,lgtMsjNews]);
+
+
 
  useEffect(() => {
 
@@ -376,7 +392,8 @@ const receptor2 = useRef(null);
 
   
   
-  const deletePost = async (id) =>{
+  const deletePostbyId = async (id) =>{
+    console.log("Deleting post with id:", id);
     
     const msjdelete = await deletePost(id);
     alert(msjdelete.msj);
@@ -497,11 +514,12 @@ console.log(msjs);
         
     </div>
     
-    <NewPost setPosts={setfakePosts} tokeId={tokeId}></NewPost>
+    <NewPost setPosts={setfakePosts} tokeId={tokeId} ></NewPost>
 
      <div className='postcardInstancia'>
     { fakePosts.map((post)=>(
-     <PostCards key={post.id} post={post} deletepost={deletePost} />   
+     <PostCards key={post.id} post={post} deletepost={()=>deletePostbyId(post.id)} setfakePosts={setfakePosts}/>  
+
     )      
     )}</div>
     {!showChat&&(<div className='barChat' onClick={functionShowChat}>chats {totalNotSeen}</div>)}

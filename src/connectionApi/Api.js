@@ -337,3 +337,17 @@ export const deletePost = async(id)=>{
     const data = await response.json();
     return data;
 }
+
+export const updatePosts = async(id,description) =>{
+
+    const response = await fetch(`${route}post/content/${id}`,{
+        method:"PATCH",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({description})
+    });
+
+    const data = await response.json();
+    return data;
+}
